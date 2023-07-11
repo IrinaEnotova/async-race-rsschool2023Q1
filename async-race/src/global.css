@@ -5,13 +5,3 @@ body {
   background: #111112;
   font-family: 'Orbitron', Arial, Helvetica, sans-serif;
 }
-
-h1 {
-  font-weight: 100;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: linear-gradient(90deg, red, orange, fuchsia, green);
-  text-shadow: 4px 1px 2px rgba(255, 255, 255, 0.2);
-  letter-spacing: 12.5px;
-}

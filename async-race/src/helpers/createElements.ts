@@ -16,7 +16,10 @@ export const createBasicElement = ({
   if (callback) {
     basicElement.addEventListener('click', callback);
   }
-  basicElement.textContent = textContent;
+  if (textContent) {
+    basicElement.textContent = textContent;
+  }
+
   parentElement?.append(basicElement);
 };
 
