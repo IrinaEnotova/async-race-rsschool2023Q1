@@ -1,0 +1,22 @@
+.footer {
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer_github {
+  background-image: url('../../images/github.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.footer_rsschool {
+  background-image: url('../../images/rs_school.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 60px;
+  height: 20px;
+}

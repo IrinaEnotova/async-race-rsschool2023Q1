@@ -39,6 +39,37 @@ export const PARAMS_BTN_WINNERS: IBasicElementParams = {
   },
 };
 
+export const PARAMS_MAIN: IBasicElementParams = {
+  tagName: 'main',
+  classNames: ['main'],
+  parentSelector: 'body',
+};
+
+export const PARAMS_FOOTER: IBasicElementParams = {
+  tagName: 'footer',
+  classNames: ['footer'],
+  parentSelector: 'body',
+};
+
+export const PARAMS_FOOTER_GITHUB: IBasicElementParams = {
+  tagName: 'div',
+  classNames: ['footer_github'],
+  parentSelector: '.footer',
+};
+
+export const PARAMS_FOOTER_YEAR: IBasicElementParams = {
+  tagName: 'div',
+  textContent: '2023',
+  classNames: ['footer_year'],
+  parentSelector: '.footer',
+};
+
+export const PARAMS_FOOTER_RS_LOGO: IBasicElementParams = {
+  tagName: 'div',
+  classNames: ['footer_rsschool'],
+  parentSelector: '.footer',
+};
+
 export const CAR_SVG = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
 width="1280.000000pt" height="640.000000pt" viewBox="0 0 1280.000000 640.000000"
 preserveAspectRatio="xMidYMid meet">

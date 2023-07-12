@@ -23,4 +23,4 @@ export const createBasicElement = ({
   parentElement?.append(basicElement);
 };
 
-export const test = 1;
+export const a = 1;
