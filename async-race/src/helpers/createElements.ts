@@ -1,4 +1,4 @@
-import { IBasicElementParams } from '../types/interfaces';
+import { IBasicElementParams, IInputParams } from '../types/interfaces';
 
 export const createBasicElement = ({
   tagName,
@@ -23,4 +23,17 @@ export const createBasicElement = ({
   parentElement?.append(basicElement);
 };
 
-export const a = 1;
+export const createInputElement = ({ classNames = [], type, placeholder, parentSelector }: IInputParams): void => {
+  const inputElement = document.createElement('input');
+  const parentElement = document.querySelector(parentSelector);
+
+  if (classNames.length > 0) {
+    classNames.forEach((className: string) => inputElement.classList.add(className));
+  }
+  if (placeholder) {
+    inputElement.placeholder = placeholder;
+  }
+  inputElement.type = type;
+
+  parentElement?.append(inputElement);
+};

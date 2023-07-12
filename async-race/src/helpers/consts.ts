@@ -1,4 +1,4 @@
-import { IBasicElementParams } from '../types/interfaces';
+import { IBasicElementParams, IInputParams } from '../types/interfaces';
 
 export const PARAMS_HEADER: IBasicElementParams = {
   tagName: 'header',
@@ -43,6 +43,70 @@ export const PARAMS_MAIN: IBasicElementParams = {
   tagName: 'main',
   classNames: ['main'],
   parentSelector: 'body',
+};
+
+export const PARAMS_GARAGE_WRAPPER: IBasicElementParams = {
+  tagName: 'div',
+  classNames: ['garage-wrapper'],
+  parentSelector: '.main',
+};
+
+export const PARAMS_FORM_CREATE: IBasicElementParams = {
+  tagName: 'form',
+  classNames: ['form-create', 'form'],
+  parentSelector: '.garage-wrapper',
+};
+
+export const PARAMS_INPUT_TEXT_CREATE: IInputParams = {
+  classNames: ['input-text', 'input-text_create'],
+  type: 'text',
+  placeholder: 'Type the name of car',
+  parentSelector: '.form-create',
+};
+
+export const PARAMS_INPUT_COLOR_CREATE: IInputParams = {
+  classNames: ['input-color', 'input-color_create'],
+  type: 'color',
+  parentSelector: '.form-create',
+};
+
+export const PARAMS_CREATE_BUTTON: IBasicElementParams = {
+  tagName: 'button',
+  textContent: 'Create',
+  classNames: ['btn-create', 'form-btn'],
+  parentSelector: '.form-create',
+  callback: () => {
+    console.log('hello from creation!');
+  },
+};
+
+export const PARAMS_FORM_UPDATE: IBasicElementParams = {
+  tagName: 'form',
+  classNames: ['form-update', 'form'],
+  parentSelector: '.garage-wrapper',
+};
+
+export const PARAMS_INPUT_TEXT_UPDATE: IInputParams = {
+  classNames: ['input-text', 'input-text_update'],
+  type: 'text',
+  placeholder: 'Type the name of car',
+  parentSelector: '.form-update',
+};
+
+export const PARAMS_INPUT_COLOR_UPDATE: IInputParams = {
+  classNames: ['input-color', 'input-color_update'],
+  type: 'color',
+  parentSelector: '.form-update',
+};
+
+export const PARAMS_UPDATE_BUTTON: IBasicElementParams = {
+  tagName: 'button',
+  textContent: 'Update',
+  classNames: ['btn-update', 'form-btn'],
+  parentSelector: '.form-update',
+  callback: () => {
+    console.log('hello from creation!');
+  },
 };
 
 export const PARAMS_FOOTER: IBasicElementParams = {

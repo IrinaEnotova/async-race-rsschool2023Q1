@@ -1,0 +1,25 @@
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+.form-create {
+  margin-bottom: 10px;
+}
+
+.form-btn {
+  background-color: #cacaca;
+  padding: 5px 15px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+
+.form-btn:hover {
+  background-color: rgb(177, 189, 63);
+  color: #fff;
+}
+
+.input-color {
+  height: 32px;
+}
