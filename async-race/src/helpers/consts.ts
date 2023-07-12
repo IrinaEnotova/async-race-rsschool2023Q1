@@ -1,4 +1,13 @@
+/* eslint-disable import/no-cycle */
 import { IBasicElementParams, IInputParams } from '../types/interfaces';
+import { updateCarsStore } from './api';
+import store from './store';
+
+export const BASE_URL = 'http://127.0.0.1:3000';
+export const GARAGE_URL = `${BASE_URL}/garage`;
+export const WINNERS_URL = `${BASE_URL}/winners`;
+export const ENGINE = `${BASE_URL}/engine`;
+export const CARS_PER_PAGE = 7;
 
 export const PARAMS_HEADER: IBasicElementParams = {
   tagName: 'header',
@@ -25,7 +34,7 @@ export const PARAMS_BTN_GARAGE: IBasicElementParams = {
   classNames: ['btn-to-garage'],
   parentSelector: '.header_btns-container',
   callback: () => {
-    console.log('hello from garage-btn!');
+    updateCarsStore();
   },
 };
 
@@ -107,6 +116,26 @@ export const PARAMS_UPDATE_BUTTON: IBasicElementParams = {
   callback: () => {
     console.log('hello from creation!');
   },
+};
+
+export const PARAMS_GARAGE: IBasicElementParams = {
+  tagName: 'div',
+  classNames: ['garage'],
+  parentSelector: '.garage-wrapper',
+};
+
+export const PARAMS_GARAGE_HEADING: IBasicElementParams = {
+  tagName: 'h2',
+  textContent: `Garage: ${store.carsCount} cars`,
+  classNames: ['garage-heading'],
+  parentSelector: '.garage',
+};
+
+export const PARAMS_NUM_OF_PAGE: IBasicElementParams = {
+  tagName: 'h3',
+  textContent: `Page #${store.carsPage}`,
+  classNames: ['garage_page-number'],
+  parentSelector: '.garage',
 };
 
 export const PARAMS_FOOTER: IBasicElementParams = {
