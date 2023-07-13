@@ -1,0 +1,50 @@
+.btns-container {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.car-block {
+  position: relative;
+  border-bottom: 3px dashed #cacaca;
+}
+
+.car-name {
+  max-width: 250px;
+  text-align: end;
+}
+
+.car-btn {
+  background-color: #fff;
+  padding: 3px 10px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+
+.select-btn:hover,
+.start-btn:hover {
+  background-color: rgb(177, 189, 63);
+  color: #fff;
+}
+
+.delete-btn:hover,
+.stop-btn:hover {
+  background-color: red;
+  color: #fff;
+}
+
+.car-img {
+  margin-bottom: -9px;
+}
+
+.flag {
+  position: absolute;
+  bottom: 0;
+  right: 110px;
+  width: 40px;
+  height: 40px;
+  background-image: url('../../images/finish-flag.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
