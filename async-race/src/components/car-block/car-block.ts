@@ -1,6 +1,5 @@
 /* eslint-disable max-lines-per-function */
 import { createBasicElement, createElementWithInner } from '../../helpers/createElements';
-// eslint-disable-next-line import/no-cycle
 import getCarImg from '../../helpers/getCarImg';
 import { ICar } from '../../types/interfaces';
 import './car-block.css';

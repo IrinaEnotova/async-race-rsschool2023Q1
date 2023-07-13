@@ -23,7 +23,13 @@ export const createBasicElement = ({
   parentElement?.append(basicElement);
 };
 
-export const createInputElement = ({ classNames = [], type, placeholder, parentSelector }: IInputParams): void => {
+export const createInputElement = ({
+  classNames = [],
+  type,
+  placeholder,
+  parentSelector,
+  disabled,
+}: IInputParams): void => {
   const inputElement = document.createElement('input');
   const parentElement = document.querySelector(parentSelector);
 
@@ -32,6 +38,9 @@ export const createInputElement = ({ classNames = [], type, placeholder, parentS
   }
   if (placeholder) {
     inputElement.placeholder = placeholder;
+  }
+  if (disabled) {
+    inputElement.disabled = true;
   }
   inputElement.type = type;
 

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { CAR_SVG } from './consts';
 
 const getCarImg = (color: string): string => {

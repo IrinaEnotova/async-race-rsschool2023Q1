@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { ICar, ICars } from '../types/interfaces';
 import { CARS_PER_PAGE, GARAGE_URL, PARAMS_GARAGE_HEADING, PARAMS_NUM_OF_PAGE } from './consts';
 import createCarBlock from '../components/car-block/car-block';

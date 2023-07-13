@@ -1,6 +1,4 @@
-/* eslint-disable import/no-cycle */
 import { IBasicElementParams, IInputParams } from '../types/interfaces';
-import { updateCarsStore } from './api';
 import store from './store';
 
 export const BASE_URL = 'http://127.0.0.1:3000';
@@ -34,7 +32,7 @@ export const PARAMS_BTN_GARAGE: IBasicElementParams = {
   classNames: ['btn-to-garage'],
   parentSelector: '.header_btns-container',
   callback: () => {
-    updateCarsStore();
+    console.log('hello from winners-btn');
   },
 };
 
@@ -71,12 +69,14 @@ export const PARAMS_INPUT_TEXT_CREATE: IInputParams = {
   type: 'text',
   placeholder: 'Type the name of car',
   parentSelector: '.form-create',
+  disabled: false,
 };
 
 export const PARAMS_INPUT_COLOR_CREATE: IInputParams = {
   classNames: ['input-color', 'input-color_create'],
   type: 'color',
   parentSelector: '.form-create',
+  disabled: false,
 };
 
 export const PARAMS_CREATE_BUTTON: IBasicElementParams = {
@@ -98,14 +98,16 @@ export const PARAMS_FORM_UPDATE: IBasicElementParams = {
 export const PARAMS_INPUT_TEXT_UPDATE: IInputParams = {
   classNames: ['input-text', 'input-text_update'],
   type: 'text',
-  placeholder: 'Type the name of car',
+  placeholder: 'Choose a car',
   parentSelector: '.form-update',
+  disabled: true,
 };
 
 export const PARAMS_INPUT_COLOR_UPDATE: IInputParams = {
   classNames: ['input-color', 'input-color_update'],
   type: 'color',
   parentSelector: '.form-update',
+  disabled: true,
 };
 
 export const PARAMS_UPDATE_BUTTON: IBasicElementParams = {
@@ -115,6 +117,42 @@ export const PARAMS_UPDATE_BUTTON: IBasicElementParams = {
   parentSelector: '.form-update',
   callback: () => {
     console.log('hello from creation!');
+  },
+};
+
+export const PARAMS_RACE_BTNS_CONTAINER: IBasicElementParams = {
+  tagName: 'div',
+  classNames: ['race-btns-container'],
+  parentSelector: '.garage-wrapper',
+};
+
+export const PARAMS_RACE_BTN: IBasicElementParams = {
+  tagName: 'button',
+  classNames: ['race-btn'],
+  parentSelector: '.race-btns-container',
+  textContent: 'Race',
+  callback: () => {
+    console.log('race!');
+  },
+};
+
+export const PARAMS_RESET_BTN: IBasicElementParams = {
+  tagName: 'button',
+  classNames: ['reset-btn'],
+  parentSelector: '.race-btns-container',
+  textContent: 'Reset',
+  callback: () => {
+    console.log('reset race');
+  },
+};
+
+export const PARAMS_GENERATE_CARS: IBasicElementParams = {
+  tagName: 'button',
+  classNames: ['generate-btn'],
+  parentSelector: '.race-btns-container',
+  textContent: 'Generate cars',
+  callback: () => {
+    console.log('genetate cars');
   },
 };
 
@@ -164,7 +202,7 @@ export const PARAMS_FOOTER_RS_LOGO: IBasicElementParams = {
 };
 
 export const CAR_SVG = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-width="80.000000pt" height="40.000000pt" viewBox="0 0 1280.000000 640.000000"
+width="60.000000pt" height="25.000000pt" viewBox="0 0 1280.000000 640.000000"
 preserveAspectRatio="xMidYMid meet">
 <metadata>
 Created by potrace 1.15, written by Peter Selinger 2001-2017

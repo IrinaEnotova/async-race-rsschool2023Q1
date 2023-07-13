@@ -12,6 +12,7 @@ export interface IInputParams {
   type: string;
   placeholder?: string;
   parentSelector: string;
+  disabled: boolean;
 }
 
 export interface ICar {
