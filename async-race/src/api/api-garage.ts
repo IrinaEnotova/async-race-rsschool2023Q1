@@ -1,3 +1,4 @@
+import Methods from '../types/enums';
 import { ICar, ICars } from '../types/interfaces';
 import { CARS_PER_PAGE, GARAGE_URL } from '../utils/consts';
 
@@ -14,4 +15,17 @@ export async function getCar(id: number): Promise<ICar> {
   const response = await fetch(`${GARAGE_URL}/${id}`);
   const car = response.json();
   return car;
+}
+
+export async function createCar(name: string, color: string): Promise<void> {
+  await fetch(GARAGE_URL, {
+    method: Methods.POST,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name,
+      color,
+    }),
+  });
 }

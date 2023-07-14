@@ -15,6 +15,15 @@ export interface IInputParams {
   disabled: boolean;
 }
 
+export interface IEventElementParams {
+  tagName: string;
+  classNames: string[];
+  textContent?: string;
+  innerHTML?: string;
+  parentSelector: string;
+  callback: (event: Event) => void;
+}
+
 export interface ICar {
   name: string;
   color: string;

@@ -1,7 +1,7 @@
 import { IBasicElementParams, IInputParams } from '../types/interfaces';
 import store from './store';
 
-export const BASE_URL = 'http://127.0.0.1:3000';
+export const BASE_URL = 'http://localhost:3000';
 export const GARAGE_URL = `${BASE_URL}/garage`;
 export const WINNERS_URL = `${BASE_URL}/winners`;
 export const ENGINE = `${BASE_URL}/engine`;
@@ -90,16 +90,6 @@ export const PARAMS_INPUT_COLOR_CREATE: IInputParams = {
   type: 'color',
   parentSelector: '.form-create',
   disabled: false,
-};
-
-export const PARAMS_CREATE_BUTTON: IBasicElementParams = {
-  tagName: 'button',
-  textContent: 'Create',
-  classNames: ['btn-create', 'form-btn'],
-  parentSelector: '.form-create',
-  callback: () => {
-    console.log('hello from creation!');
-  },
 };
 
 export const PARAMS_FORM_UPDATE: IBasicElementParams = {
