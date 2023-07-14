@@ -5,3 +5,7 @@ body {
   background: #111112;
   font-family: 'Orbitron', Arial, Helvetica, sans-serif;
 }
+
+.hidden {
+  display: none;
+}

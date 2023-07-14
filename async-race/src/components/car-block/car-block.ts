@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
-import { createBasicElement, createElementWithInner } from '../../helpers/createElements';
-import getCarImg from '../../helpers/getCarImg';
+import { createBasicElement, createElementWithInner } from '../../utils/createElements';
+import getCarImg from '../../utils/getCarImg';
 import { ICar } from '../../types/interfaces';
 import './car-block.css';
 
@@ -37,7 +37,7 @@ const createCarBlock = ({ name, color, id }: ICar): void => {
   });
   createBasicElement({
     tagName: 'button',
-    classNames: ['car-btn', 'start-btn'],
+    classNames: ['car-btn', 'start-btn', `start-btn-${id}`],
     textContent: 'A',
     parentSelector: `.btns-container-${id}`,
     callback: () => {
@@ -55,7 +55,7 @@ const createCarBlock = ({ name, color, id }: ICar): void => {
   });
   createElementWithInner({
     tagName: 'div',
-    classNames: [`car-img`],
+    classNames: [`car-img-${id}`, 'car-img'],
     parentSelector: `.car-block-${id}`,
     innerHTML: getCarImg(color),
   });

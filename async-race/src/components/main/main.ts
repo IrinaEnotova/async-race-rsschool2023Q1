@@ -1,6 +1,6 @@
-import { PARAMS_MAIN } from '../../helpers/consts';
+import { PARAMS_MAIN } from '../../utils/consts';
 import createGarage from '../../pages/garage';
-import { createBasicElement } from '../../helpers/createElements';
+import { createBasicElement } from '../../utils/createElements';
 import './main.css';
 
 const createMain = (): void => {

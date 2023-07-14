@@ -36,6 +36,7 @@
 
 .car-img {
   margin-bottom: -9px;
+  width: fit-content;
 }
 
 .flag {

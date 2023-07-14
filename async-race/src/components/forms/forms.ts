@@ -7,8 +7,8 @@ import {
   PARAMS_INPUT_TEXT_UPDATE,
   PARAMS_INPUT_COLOR_UPDATE,
   PARAMS_UPDATE_BUTTON,
-} from '../../helpers/consts';
-import { createBasicElement, createInputElement } from '../../helpers/createElements';
+} from '../../utils/consts';
+import { createBasicElement, createInputElement } from '../../utils/createElements';
 import './forms.css';
 
 const createForm = (action: 'create' | 'update'): void => {

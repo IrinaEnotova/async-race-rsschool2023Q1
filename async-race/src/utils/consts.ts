@@ -32,7 +32,13 @@ export const PARAMS_BTN_GARAGE: IBasicElementParams = {
   classNames: ['btn-to-garage'],
   parentSelector: '.header_btns-container',
   callback: () => {
-    console.log('hello from winners-btn');
+    const garage = document.querySelector('.garage-wrapper');
+    const winners = document.querySelector('.winners-wrapper');
+
+    if (!winners?.classList.contains('hidden')) {
+      garage?.classList.remove('hidden');
+      winners?.classList.add('hidden');
+    }
   },
 };
 
@@ -42,7 +48,13 @@ export const PARAMS_BTN_WINNERS: IBasicElementParams = {
   classNames: ['btn-to-winners'],
   parentSelector: '.header_btns-container',
   callback: () => {
-    console.log('hello from winners-btn!');
+    const garage = document.querySelector('.garage-wrapper');
+    const winners = document.querySelector('.winners-wrapper');
+
+    if (!garage?.classList.contains('hidden')) {
+      garage?.classList.add('hidden');
+      winners?.classList.remove('hidden');
+    }
   },
 };
 

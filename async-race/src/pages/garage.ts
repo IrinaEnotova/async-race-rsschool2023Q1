@@ -1,4 +1,4 @@
-import { createBasicElement } from '../helpers/createElements';
+import { createBasicElement } from '../utils/createElements';
 import {
   PARAMS_GARAGE_WRAPPER,
   PARAMS_GARAGE,
@@ -8,9 +8,9 @@ import {
   PARAMS_RACE_BTN,
   PARAMS_RESET_BTN,
   PARAMS_GENERATE_CARS,
-} from '../helpers/consts';
+} from '../utils/consts';
 import createForm from '../components/forms/forms';
-import { updateState } from '../helpers/api';
+import { updateState } from '../api/api';
 import './garage.css';
 
 const createGarage = async (): Promise<void> => {

@@ -1,7 +1,7 @@
 import { ICar, ICars } from '../types/interfaces';
-import { CARS_PER_PAGE, GARAGE_URL, PARAMS_GARAGE_HEADING, PARAMS_NUM_OF_PAGE } from './consts';
+import { CARS_PER_PAGE, GARAGE_URL, PARAMS_GARAGE_HEADING, PARAMS_NUM_OF_PAGE } from '../utils/consts';
 import createCarBlock from '../components/car-block/car-block';
-import store from './store';
+import store from '../utils/store';
 
 export async function getCars(page: number, limit = CARS_PER_PAGE): Promise<ICars> {
   const response = await fetch(`${GARAGE_URL}?_page=${page}&_limit=${limit}`);

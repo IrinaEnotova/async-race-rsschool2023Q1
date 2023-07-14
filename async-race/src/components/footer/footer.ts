@@ -1,5 +1,5 @@
-import { PARAMS_FOOTER, PARAMS_FOOTER_GITHUB, PARAMS_FOOTER_YEAR, PARAMS_FOOTER_RS_LOGO } from '../../helpers/consts';
-import { createBasicElement } from '../../helpers/createElements';
+import { PARAMS_FOOTER, PARAMS_FOOTER_GITHUB, PARAMS_FOOTER_YEAR, PARAMS_FOOTER_RS_LOGO } from '../../utils/consts';
+import { createBasicElement } from '../../utils/createElements';
 import './footer.css';
 
 const createFooter = (): void => {
