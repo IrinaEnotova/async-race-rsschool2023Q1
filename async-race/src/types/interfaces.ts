@@ -26,9 +26,23 @@ export interface ICars {
   count: number;
 }
 
+export interface IWinner {
+  id: number;
+  wins: number;
+  time: number;
+}
+
+export interface IWinners {
+  items: IWinner[];
+  count: number;
+}
+
 export interface IStore {
   carsPage: number;
   carsArray: ICar[];
   carsCount: number;
+  winnersPage: number;
+  winnersArray: IWinner[];
+  winnersCount: number;
   currentPage: 'garage' | 'winners';
 }

@@ -10,7 +10,7 @@ import {
   PARAMS_GENERATE_CARS,
 } from '../utils/consts';
 import createForm from '../components/forms/forms';
-import { updateState } from '../api/api';
+import { updateState } from '../api/api-update';
 import './garage.css';
 
 const createGarage = async (): Promise<void> => {

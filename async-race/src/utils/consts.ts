@@ -6,6 +6,7 @@ export const GARAGE_URL = `${BASE_URL}/garage`;
 export const WINNERS_URL = `${BASE_URL}/winners`;
 export const ENGINE = `${BASE_URL}/engine`;
 export const CARS_PER_PAGE = 7;
+export const WINNERS_PER_PAGE = 10;
 
 export const PARAMS_HEADER: IBasicElementParams = {
   tagName: 'header',
@@ -186,6 +187,57 @@ export const PARAMS_NUM_OF_PAGE: IBasicElementParams = {
   textContent: `Page #${store.carsPage}`,
   classNames: ['garage_page-number'],
   parentSelector: '.garage',
+};
+
+export const PARAMS_WINNERS: IBasicElementParams = {
+  tagName: 'div',
+  classNames: ['winners-wrapper', 'hidden'],
+  parentSelector: '.main',
+};
+
+export const PARAMS_WINNERS_HEADING: IBasicElementParams = {
+  tagName: 'h2',
+  textContent: `Winners: ${store.winnersCount} cars`,
+  classNames: ['winners-heading'],
+  parentSelector: '.winners-wrapper',
+};
+
+export const PARAMS_NUM_OF_PAGE_WINNERS: IBasicElementParams = {
+  tagName: 'h3',
+  textContent: `Page #${store.winnersPage}`,
+  classNames: ['winners_page-number'],
+  parentSelector: '.winners-wrapper',
+};
+
+export const PARAMS_TABLE: IBasicElementParams = {
+  tagName: 'table',
+  classNames: ['table'],
+  parentSelector: '.winners-wrapper',
+};
+
+export const PARAMS_THEAD: IBasicElementParams = {
+  tagName: 'thead',
+  classNames: ['thead'],
+  parentSelector: '.table',
+};
+
+export const PARAMS_TR_THEAD: IBasicElementParams = {
+  tagName: 'tr',
+  classNames: ['tr-head'],
+  parentSelector: '.thead',
+};
+
+export const PARAMS_TH_ITEM: IBasicElementParams = {
+  tagName: 'th',
+  textContent: '',
+  classNames: ['th-head', 'th'],
+  parentSelector: '.tr-head',
+};
+
+export const PARAMS_TBODY: IBasicElementParams = {
+  tagName: 'tbody',
+  classNames: ['tbody'],
+  parentSelector: '.table',
 };
 
 export const PARAMS_FOOTER: IBasicElementParams = {
