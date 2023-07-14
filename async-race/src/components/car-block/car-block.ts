@@ -1,8 +1,9 @@
 /* eslint-disable max-lines-per-function */
-import { createBasicElement, createElementWithInner } from '../../utils/createElements';
+import { createBasicElement, createElementWithData, createElementWithInner } from '../../utils/createElements';
 import getCarImg from '../../utils/getCarImg';
 import { ICar } from '../../types/interfaces';
 import './car-block.css';
+import store from '../../utils/store';
 
 const createCarBlock = ({ name, color, id }: ICar): void => {
   createBasicElement({ tagName: 'div', classNames: [`car-block-${id}`, 'car-block'], parentSelector: '.garage' });
@@ -17,14 +18,30 @@ const createCarBlock = ({ name, color, id }: ICar): void => {
     classNames: [`btns-container-${id}`, 'btns-container'],
     parentSelector: `.car-block-${id}`,
   });
-  createBasicElement({
+  createElementWithData({
     tagName: 'button',
     classNames: ['car-btn', 'select-btn'],
     textContent: 'Select',
     parentSelector: `.btns-container-${id}`,
-    callback: () => {
-      console.log('Select car');
+    callback: (event: Event) => {
+      const target = event.target as HTMLElement;
+      const selectedId = target.getAttribute('data-index');
+      const nameInput = document.querySelector('.input-text_update') as HTMLInputElement;
+      const colorInput = document.querySelector('.input-color_update') as HTMLInputElement;
+      const updateBtn = document.querySelector('.btn-update') as HTMLButtonElement;
+
+      if (selectedId) {
+        store.selectedCarIndex = +selectedId - 1;
+        store.selectedCar = store.carsArray[store.selectedCarIndex];
+      }
+      nameInput.disabled = false;
+      colorInput.disabled = false;
+      updateBtn.disabled = false;
+
+      nameInput.value = store.selectedCar.name;
+      colorInput.value = store.selectedCar.color;
     },
+    dataIndex: `${id}`,
   });
   createBasicElement({
     tagName: 'button',

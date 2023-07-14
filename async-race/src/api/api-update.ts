@@ -12,6 +12,7 @@ import createWinnerRow from '../components/winner-row/winner-row';
 
 export async function updateCarsStore(): Promise<void> {
   const { items, count } = await getCars(store.carsPage);
+  console.log(items);
   store.carsArray = items;
   store.carsCount = count;
 

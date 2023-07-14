@@ -29,3 +29,16 @@ export async function createCar(name: string, color: string): Promise<void> {
     }),
   });
 }
+
+export async function updateCar(name: string, color: string, id: number): Promise<void> {
+  await fetch(`${GARAGE_URL}/${id}`, {
+    method: Methods.PUT,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name,
+      color,
+    }),
+  });
+}

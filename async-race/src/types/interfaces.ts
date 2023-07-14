@@ -4,7 +4,11 @@ export interface IBasicElementParams {
   textContent?: string;
   innerHTML?: string;
   parentSelector: string;
-  callback?: (() => void) | null;
+  callback?: ((event: Event) => void) | null;
+}
+
+export interface IElementDisabled extends IBasicElementParams {
+  disabled: boolean;
 }
 
 export interface IInputParams {
@@ -22,6 +26,7 @@ export interface IEventElementParams {
   innerHTML?: string;
   parentSelector: string;
   callback: (event: Event) => void;
+  dataIndex?: string;
 }
 
 export interface ICar {
@@ -50,6 +55,8 @@ export interface IStore {
   carsPage: number;
   carsArray: ICar[];
   carsCount: number;
+  selectedCarIndex: number;
+  selectedCar: ICar;
   winnersPage: number;
   winnersArray: IWinner[];
   winnersCount: number;

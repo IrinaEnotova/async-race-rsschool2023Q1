@@ -1,4 +1,4 @@
-import { IBasicElementParams, IEventElementParams, IInputParams } from '../types/interfaces';
+import { IBasicElementParams, IElementDisabled, IEventElementParams, IInputParams } from '../types/interfaces';
 
 export const createBasicElement = ({
   tagName,
@@ -18,6 +18,60 @@ export const createBasicElement = ({
   }
   if (textContent) {
     basicElement.textContent = textContent;
+  }
+
+  parentElement?.append(basicElement);
+};
+
+export const createDisabledElement = ({
+  tagName,
+  classNames = [],
+  textContent = '',
+  parentSelector,
+  callback = null,
+  disabled = true,
+}: IElementDisabled): void => {
+  const element = document.createElement(tagName) as HTMLButtonElement;
+  const parentElement = document.querySelector(parentSelector);
+
+  if (classNames.length > 0) {
+    classNames.forEach((className: string) => element.classList.add(className));
+  }
+  if (callback) {
+    element.addEventListener('click', callback);
+  }
+  if (textContent) {
+    element.textContent = textContent;
+  }
+  if (disabled) {
+    element.disabled = true;
+  }
+
+  parentElement?.append(element);
+};
+
+export const createElementWithData = ({
+  tagName,
+  classNames = [],
+  textContent = '',
+  parentSelector,
+  callback,
+  dataIndex,
+}: IEventElementParams): void => {
+  const basicElement = document.createElement(tagName);
+  const parentElement = document.querySelector(parentSelector);
+
+  if (classNames.length > 0) {
+    classNames.forEach((className: string) => basicElement.classList.add(className));
+  }
+  if (callback) {
+    basicElement.addEventListener('click', callback);
+  }
+  if (textContent) {
+    basicElement.textContent = textContent;
+  }
+  if (dataIndex) {
+    basicElement.setAttribute('data-index', dataIndex);
   }
 
   parentElement?.append(basicElement);

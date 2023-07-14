@@ -113,16 +113,6 @@ export const PARAMS_INPUT_COLOR_UPDATE: IInputParams = {
   disabled: true,
 };
 
-export const PARAMS_UPDATE_BUTTON: IBasicElementParams = {
-  tagName: 'button',
-  textContent: 'Update',
-  classNames: ['btn-update', 'form-btn'],
-  parentSelector: '.form-update',
-  callback: () => {
-    console.log('hello from creation!');
-  },
-};
-
 export const PARAMS_RACE_BTNS_CONTAINER: IBasicElementParams = {
   tagName: 'div',
   classNames: ['race-btns-container'],

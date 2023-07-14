@@ -5,13 +5,17 @@ import {
   PARAMS_FORM_UPDATE,
   PARAMS_INPUT_TEXT_UPDATE,
   PARAMS_INPUT_COLOR_UPDATE,
-  PARAMS_UPDATE_BUTTON,
   PARAMS_GARAGE_HEADING,
   PARAMS_NUM_OF_PAGE,
 } from '../../utils/consts';
-import { createBasicElement, createElementWithEvent, createInputElement } from '../../utils/createElements';
-import { IEventElementParams } from '../../types/interfaces';
-import { createCar } from '../../api/api-garage';
+import {
+  createBasicElement,
+  createElementWithEvent,
+  createDisabledElement,
+  createInputElement,
+} from '../../utils/createElements';
+import { IEventElementParams, IElementDisabled } from '../../types/interfaces';
+import { createCar, updateCar } from '../../api/api-garage';
 import { updateState } from '../../api/api-update';
 import store from '../../utils/store';
 import './forms.css';
@@ -19,6 +23,11 @@ import './forms.css';
 function clearDataOnPage(): void {
   const garage = document.querySelector('.garage');
   const winners = document.querySelector('winners-wrapper');
+  const nameInput = document.querySelector('.input-text_create') as HTMLInputElement;
+  const colorInput = document.querySelector('.input-color_create') as HTMLInputElement;
+  nameInput.value = '';
+  colorInput.value = '#000000';
+
   if (garage) {
     garage.innerHTML = '';
   }
@@ -27,12 +36,34 @@ function clearDataOnPage(): void {
   }
 }
 
-async function updateDataOnPage(): Promise<void> {
+async function updateDataAfterCreation(): Promise<void> {
   store.carsCount += 1;
   PARAMS_GARAGE_HEADING.textContent = `Garage: ${store.carsCount} cars`;
   createBasicElement(PARAMS_GARAGE_HEADING);
   createBasicElement(PARAMS_NUM_OF_PAGE);
   await updateState();
+}
+
+async function updateDataAfterUpdate(): Promise<void> {
+  createBasicElement(PARAMS_GARAGE_HEADING);
+  createBasicElement(PARAMS_NUM_OF_PAGE);
+  await updateState();
+}
+
+function clearDataAfterUpdate(): void {
+  const nameInput = document.querySelector('.input-text_update') as HTMLInputElement;
+  const colorInput = document.querySelector('.input-color_update') as HTMLInputElement;
+  const updateBtn = document.querySelector('.btn-update') as HTMLButtonElement;
+
+  nameInput.value = '';
+  colorInput.value = '#000000';
+
+  nameInput.disabled = true;
+  colorInput.disabled = true;
+  updateBtn.disabled = true;
+
+  store.selectedCarIndex = -1;
+  store.selectedCar = { name: 'none', color: '#000000', id: 0 };
 }
 
 const PARAMS_CREATE_BUTTON: IEventElementParams = {
@@ -50,8 +81,32 @@ const PARAMS_CREATE_BUTTON: IEventElementParams = {
 
     createCar(name, color);
     clearDataOnPage();
-    await updateDataOnPage();
+    await updateDataAfterCreation();
   },
+};
+
+export const PARAMS_UPDATE_BUTTON: IElementDisabled = {
+  tagName: 'button',
+  textContent: 'Update',
+  classNames: ['btn-update', 'form-btn'],
+  parentSelector: '.form-update',
+  callback: async (event: Event) => {
+    event?.preventDefault();
+
+    const nameInput = document.querySelector('.input-text_update') as HTMLInputElement;
+    const colorInput = document.querySelector('.input-color_update') as HTMLInputElement;
+    const name = nameInput.value;
+    const color = colorInput.value;
+    const { id } = store.selectedCar;
+
+    updateCar(name, color, id);
+    clearDataAfterUpdate();
+    clearDataOnPage();
+    await updateDataAfterUpdate();
+    clearDataOnPage();
+    await updateDataAfterUpdate();
+  },
+  disabled: true,
 };
 
 const createForm = (action: 'create' | 'update'): void => {
@@ -66,7 +121,7 @@ const createForm = (action: 'create' | 'update'): void => {
       createBasicElement(PARAMS_FORM_UPDATE);
       createInputElement(PARAMS_INPUT_TEXT_UPDATE);
       createInputElement(PARAMS_INPUT_COLOR_UPDATE);
-      createBasicElement(PARAMS_UPDATE_BUTTON);
+      createDisabledElement(PARAMS_UPDATE_BUTTON);
       break;
     default:
       throw new Error('Form was not created!');
