@@ -42,3 +42,9 @@ export async function updateCar(name: string, color: string, id: number): Promis
     }),
   });
 }
+
+export async function deleteCar(id: number): Promise<void> {
+  await fetch(`${GARAGE_URL}/${id}`, {
+    method: Methods.DELETE,
+  });
+}

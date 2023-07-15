@@ -2,8 +2,21 @@
 import { createBasicElement, createElementWithData, createElementWithInner } from '../../utils/createElements';
 import getCarImg from '../../utils/getCarImg';
 import { ICar } from '../../types/interfaces';
-import './car-block.css';
 import store from '../../utils/store';
+import { deleteCar } from '../../api/api-garage';
+import './car-block.css';
+
+function clearDataOnPage(): void {
+  const garage = document.querySelector('.garage');
+  const winners = document.querySelector('.tbody');
+
+  if (garage) {
+    garage.innerHTML = '';
+  }
+  if (winners) {
+    winners.innerHTML = '';
+  }
+}
 
 const createCarBlock = ({ name, color, id }: ICar): void => {
   createBasicElement({ tagName: 'div', classNames: [`car-block-${id}`, 'car-block'], parentSelector: '.garage' });
@@ -43,14 +56,20 @@ const createCarBlock = ({ name, color, id }: ICar): void => {
     },
     dataIndex: `${id}`,
   });
-  createBasicElement({
+  createElementWithData({
     tagName: 'button',
     classNames: ['car-btn', 'delete-btn'],
     textContent: 'Delete',
     parentSelector: `.btns-container-${id}`,
-    callback: () => {
-      console.log('Delete car');
+    callback: async (event: Event) => {
+      const target = event.target as HTMLElement;
+      const selectedId = Number(target.getAttribute('data-index'));
+
+      clearDataOnPage();
+      await deleteCar(selectedId);
+      window.location.reload();
     },
+    dataIndex: `${id}`,
   });
   createBasicElement({
     tagName: 'button',

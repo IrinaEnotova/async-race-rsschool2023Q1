@@ -22,7 +22,7 @@ import './forms.css';
 
 function clearDataOnPage(): void {
   const garage = document.querySelector('.garage');
-  const winners = document.querySelector('winners-wrapper');
+  const winners = document.querySelector('.tbody');
   const nameInput = document.querySelector('.input-text_create') as HTMLInputElement;
   const colorInput = document.querySelector('.input-color_create') as HTMLInputElement;
   nameInput.value = '';
@@ -81,7 +81,9 @@ const PARAMS_CREATE_BUTTON: IEventElementParams = {
 
     createCar(name, color);
     clearDataOnPage();
-    await updateDataAfterCreation();
+    setTimeout(async () => {
+      await updateDataAfterCreation();
+    }, 100);
   },
 };
 
@@ -102,9 +104,9 @@ export const PARAMS_UPDATE_BUTTON: IElementDisabled = {
     updateCar(name, color, id);
     clearDataAfterUpdate();
     clearDataOnPage();
-    await updateDataAfterUpdate();
-    clearDataOnPage();
-    await updateDataAfterUpdate();
+    setTimeout(async () => {
+      await updateDataAfterUpdate();
+    }, 100);
   },
   disabled: true,
 };

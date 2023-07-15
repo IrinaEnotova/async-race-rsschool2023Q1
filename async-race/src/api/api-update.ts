@@ -12,11 +12,10 @@ import createWinnerRow from '../components/winner-row/winner-row';
 
 export async function updateCarsStore(): Promise<void> {
   const { items, count } = await getCars(store.carsPage);
-  console.log(items);
   store.carsArray = items;
   store.carsCount = count;
 
-  PARAMS_GARAGE_HEADING.textContent = `Garage: ${count} cars`;
+  PARAMS_GARAGE_HEADING.textContent = `Garage: ${count} ${count === 1 ? 'car' : 'cars'}`;
   PARAMS_NUM_OF_PAGE.textContent = `Page #${store.carsPage}`;
   items.forEach((item) => {
     createCarBlock(item);
@@ -28,7 +27,7 @@ export async function updateWinnersStore(): Promise<void> {
   store.winnersArray = items;
   store.winnersCount = count;
 
-  PARAMS_WINNERS_HEADING.textContent = `Winners: ${count} cars`;
+  PARAMS_WINNERS_HEADING.textContent = `Winners: ${count} ${count === 1 ? 'car' : 'cars'}`;
   PARAMS_NUM_OF_PAGE_WINNERS.textContent = `Page #${store.winnersPage}`;
   items.forEach((item, index) => {
     createWinnerRow(item, index);
