@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { createBasicElement, createElementWithData, createElementWithInner } from '../../utils/createElements';
 import getCarImg from '../../utils/getCarImg';
 import { ICar } from '../../types/interfaces';
@@ -18,19 +17,7 @@ function clearDataOnPage(): void {
   }
 }
 
-const createCarBlock = ({ name, color, id }: ICar): void => {
-  createBasicElement({ tagName: 'div', classNames: [`car-block-${id}`, 'car-block'], parentSelector: '.garage' });
-  createBasicElement({
-    tagName: 'p',
-    classNames: ['car-name'],
-    parentSelector: `.car-block-${id}`,
-    textContent: `${name}`,
-  });
-  createBasicElement({
-    tagName: 'div',
-    classNames: [`btns-container-${id}`, 'btns-container'],
-    parentSelector: `.car-block-${id}`,
-  });
+const createSelectButton = (id: number): void => {
   createElementWithData({
     tagName: 'button',
     classNames: ['car-btn', 'select-btn'],
@@ -56,6 +43,9 @@ const createCarBlock = ({ name, color, id }: ICar): void => {
     },
     dataIndex: `${id}`,
   });
+};
+
+const createDeleteButton = (id: number): void => {
   createElementWithData({
     tagName: 'button',
     classNames: ['car-btn', 'delete-btn'],
@@ -71,6 +61,9 @@ const createCarBlock = ({ name, color, id }: ICar): void => {
     },
     dataIndex: `${id}`,
   });
+};
+
+const createStartButton = (id: number): void => {
   createBasicElement({
     tagName: 'button',
     classNames: ['car-btn', 'start-btn', `start-btn-${id}`],
@@ -80,6 +73,9 @@ const createCarBlock = ({ name, color, id }: ICar): void => {
       console.log('Start engine');
     },
   });
+};
+
+const createStopButton = (id: number): void => {
   createBasicElement({
     tagName: 'button',
     classNames: ['car-btn', 'stop-btn'],
@@ -89,6 +85,25 @@ const createCarBlock = ({ name, color, id }: ICar): void => {
       console.log('Stop engine');
     },
   });
+};
+
+const createCarBlock = ({ name, color, id }: ICar): void => {
+  createBasicElement({ tagName: 'div', classNames: [`car-block-${id}`, 'car-block'], parentSelector: '.garage' });
+  createBasicElement({
+    tagName: 'p',
+    classNames: ['car-name'],
+    parentSelector: `.car-block-${id}`,
+    textContent: `${name}`,
+  });
+  createBasicElement({
+    tagName: 'div',
+    classNames: [`btns-container-${id}`, 'btns-container'],
+    parentSelector: `.car-block-${id}`,
+  });
+  createSelectButton(id);
+  createDeleteButton(id);
+  createStartButton(id);
+  createStopButton(id);
   createElementWithInner({
     tagName: 'div',
     classNames: [`car-img-${id}`, 'car-img'],
