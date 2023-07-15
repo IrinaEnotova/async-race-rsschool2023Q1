@@ -35,6 +35,11 @@ export interface ICar {
   id: number;
 }
 
+export interface ICarWithoutId {
+  name: string;
+  color: string;
+}
+
 export interface ICars {
   items: ICar[];
   count: number;

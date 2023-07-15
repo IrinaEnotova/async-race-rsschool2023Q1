@@ -7,11 +7,28 @@ import {
   PARAMS_RACE_BTNS_CONTAINER,
   PARAMS_RACE_BTN,
   PARAMS_RESET_BTN,
-  PARAMS_GENERATE_CARS,
 } from '../utils/consts';
 import createForm from '../components/forms/forms';
 import { updateState } from '../api/api-update';
+import { IBasicElementParams } from '../types/interfaces';
+import generateRandomCars from '../utils/generateRandomCars';
 import './garage.css';
+import { createCar } from '../api/api-garage';
+
+export const PARAMS_GENERATE_CARS: IBasicElementParams = {
+  tagName: 'button',
+  classNames: ['generate-btn'],
+  parentSelector: '.race-btns-container',
+  textContent: 'Generate cars',
+  callback: () => {
+    console.log('genetate cars');
+
+    const cars = generateRandomCars();
+    cars.forEach(async (car) => {
+      await createCar(car.name, car.color);
+    });
+  },
+};
 
 const createGarage = async (): Promise<void> => {
   await updateState();

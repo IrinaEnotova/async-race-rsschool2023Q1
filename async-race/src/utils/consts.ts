@@ -139,16 +139,6 @@ export const PARAMS_RESET_BTN: IBasicElementParams = {
   },
 };
 
-export const PARAMS_GENERATE_CARS: IBasicElementParams = {
-  tagName: 'button',
-  classNames: ['generate-btn'],
-  parentSelector: '.race-btns-container',
-  textContent: 'Generate cars',
-  callback: () => {
-    console.log('genetate cars');
-  },
-};
-
 export const PARAMS_GARAGE: IBasicElementParams = {
   tagName: 'div',
   classNames: ['garage'],
