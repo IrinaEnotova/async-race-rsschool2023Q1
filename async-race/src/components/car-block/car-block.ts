@@ -76,7 +76,6 @@ const createStartButton = (id: number): void => {
     textContent: 'A',
     parentSelector: `.btns-container-${id}`,
     callback: async (event: Event) => {
-      console.log('Start engine');
       const target = event.target as HTMLButtonElement;
       const stopBtn = document.querySelector(`.stop-btn-${id}`) as HTMLButtonElement;
       console.log(stopBtn);
@@ -86,8 +85,6 @@ const createStartButton = (id: number): void => {
       const duration = distance / velocity;
 
       animateCar(id, duration);
-      // const drive = await driveCar(id, 'drive');
-      // console.log(drive.status);
     },
     dataIndex: `${id}`,
     disabled: false,
@@ -111,10 +108,22 @@ const createStopButton = (id: number): void => {
 const createCarBlock = ({ name, color, id }: ICar): void => {
   createBasicElement({ tagName: 'div', classNames: [`car-block-${id}`, 'car-block'], parentSelector: '.garage' });
   createBasicElement({
+    tagName: 'div',
+    classNames: [`car-info-${id}`, 'car-info'],
+    parentSelector: `.car-block-${id}`,
+    textContent: ``,
+  });
+  createBasicElement({
     tagName: 'p',
     classNames: ['car-name'],
-    parentSelector: `.car-block-${id}`,
+    parentSelector: `.car-info-${id}`,
     textContent: `${name}`,
+  });
+  createBasicElement({
+    tagName: 'p',
+    classNames: [`car-engine-${id}`, 'car-engine'],
+    parentSelector: `.car-info-${id}`,
+    textContent: ``,
   });
   createBasicElement({
     tagName: 'div',

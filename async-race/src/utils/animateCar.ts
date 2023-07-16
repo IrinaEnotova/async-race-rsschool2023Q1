@@ -5,8 +5,10 @@ let requestId = 0;
 
 async function checkServerError(currentId: number): Promise<void> {
   const driveCarResponse = await driveCar(currentId, 'drive');
+  const messageBlock = document.querySelector(`.car-engine-${currentId}`) as HTMLElement;
   if (driveCarResponse.status === INTERNAL_SERVER_ERROR) {
     cancelAnimationFrame(requestId);
+    messageBlock.textContent = 'The engine was broken!';
   }
 }
 

@@ -9,9 +9,21 @@
   border-bottom: 3px dashed #cacaca;
 }
 
+.car-info {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.car-engine {
+  color: red;
+  margin: 14px 0;
+}
+
 .car-name {
-  max-width: 250px;
+  min-width: 250px;
   text-align: end;
+  margin: 14px 0;
 }
 
 .car-btn {
