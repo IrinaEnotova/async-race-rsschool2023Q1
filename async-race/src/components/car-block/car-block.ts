@@ -1,8 +1,14 @@
-import { createBasicElement, createElementWithData, createElementWithInner } from '../../utils/createElements';
+import {
+  createBasicElement,
+  createElementWithData,
+  createElementWithInner,
+  createDisabledElement,
+} from '../../utils/createElements';
 import getCarImg from '../../utils/getCarImg';
 import { ICar } from '../../types/interfaces';
 import store from '../../utils/store';
-import { deleteCar } from '../../api/api-garage';
+import { deleteCar, startEngine } from '../../api/api-garage';
+import animateCar from '../../utils/animateCar';
 import './car-block.css';
 
 function clearDataOnPage(): void {
@@ -64,26 +70,41 @@ const createDeleteButton = (id: number): void => {
 };
 
 const createStartButton = (id: number): void => {
-  createBasicElement({
+  createDisabledElement({
     tagName: 'button',
     classNames: ['car-btn', 'start-btn', `start-btn-${id}`],
     textContent: 'A',
     parentSelector: `.btns-container-${id}`,
-    callback: () => {
+    callback: async (event: Event) => {
       console.log('Start engine');
+      const target = event.target as HTMLButtonElement;
+      const stopBtn = document.querySelector(`.stop-btn-${id}`) as HTMLButtonElement;
+      console.log(stopBtn);
+      target.disabled = true;
+      stopBtn.disabled = false;
+      const { velocity, distance } = await startEngine(id, 'started');
+      const duration = distance / velocity;
+
+      animateCar(id, duration);
+      // const drive = await driveCar(id, 'drive');
+      // console.log(drive.status);
     },
+    dataIndex: `${id}`,
+    disabled: false,
   });
 };
 
 const createStopButton = (id: number): void => {
-  createBasicElement({
+  createDisabledElement({
     tagName: 'button',
-    classNames: ['car-btn', 'stop-btn'],
+    classNames: ['car-btn', `stop-btn-${id}`],
     textContent: 'B',
     parentSelector: `.btns-container-${id}`,
     callback: () => {
       console.log('Stop engine');
     },
+    dataIndex: `${id}`,
+    disabled: true,
   });
 };
 

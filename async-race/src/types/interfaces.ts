@@ -8,6 +8,7 @@ export interface IBasicElementParams {
 }
 
 export interface IElementDisabled extends IBasicElementParams {
+  dataIndex?: string;
   disabled: boolean;
 }
 
@@ -43,6 +44,11 @@ export interface ICarWithoutId {
 export interface ICars {
   items: ICar[];
   count: number;
+}
+
+export interface ICarCharacteristics {
+  velocity: number;
+  distance: number;
 }
 
 export interface IWinner {

@@ -27,6 +27,7 @@ export const PARAMS_GENERATE_CARS: IBasicElementParams = {
     cars.forEach(async (car) => {
       await createCar(car.name, car.color);
     });
+    window.location.reload();
   },
 };
 

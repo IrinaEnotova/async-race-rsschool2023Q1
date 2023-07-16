@@ -1,6 +1,6 @@
 import Methods from '../types/enums';
-import { ICar, ICars } from '../types/interfaces';
-import { CARS_PER_PAGE, GARAGE_URL } from '../utils/consts';
+import { ICar, ICars, ICarCharacteristics } from '../types/interfaces';
+import { BASE_URL, CARS_PER_PAGE, GARAGE_URL } from '../utils/consts';
 
 export async function getCars(page: number, limit = CARS_PER_PAGE): Promise<ICars> {
   const response = await fetch(`${GARAGE_URL}?_page=${page}&_limit=${limit}`);
@@ -47,4 +47,20 @@ export async function deleteCar(id: number): Promise<void> {
   await fetch(`${GARAGE_URL}/${id}`, {
     method: Methods.DELETE,
   });
+}
+
+export async function startEngine(id: number, status: 'started' | 'stopped'): Promise<ICarCharacteristics> {
+  const response = await fetch(`${BASE_URL}/engine?id=${id}&status=${status}`, {
+    method: Methods.PATCH,
+  });
+
+  return response.json();
+}
+
+export async function driveCar(id: number, status: 'drive'): Promise<Response> {
+  const response = await fetch(`${BASE_URL}/engine?id=${id}&status=${status}`, {
+    method: Methods.PATCH,
+  });
+
+  return response;
 }

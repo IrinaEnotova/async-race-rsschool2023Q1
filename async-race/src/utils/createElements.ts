@@ -29,6 +29,7 @@ export const createDisabledElement = ({
   textContent = '',
   parentSelector,
   callback = null,
+  dataIndex,
   disabled = true,
 }: IElementDisabled): void => {
   const element = document.createElement(tagName) as HTMLButtonElement;
@@ -45,6 +46,9 @@ export const createDisabledElement = ({
   }
   if (disabled) {
     element.disabled = true;
+  }
+  if (dataIndex) {
+    element.setAttribute('data-index', dataIndex);
   }
 
   parentElement?.append(element);
