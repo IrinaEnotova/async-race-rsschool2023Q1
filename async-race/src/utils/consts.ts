@@ -8,6 +8,8 @@ export const ENGINE = `${BASE_URL}/engine`;
 export const CARS_PER_PAGE = 7;
 export const WINNERS_PER_PAGE = 10;
 
+export const INTERNAL_SERVER_ERROR = 500;
+
 export const PARAMS_HEADER: IBasicElementParams = {
   tagName: 'header',
   classNames: ['header'],

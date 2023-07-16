@@ -1,3 +1,15 @@
+import { driveCar } from '../api/api-garage';
+import { INTERNAL_SERVER_ERROR } from './consts';
+
+let requestId = 0;
+
+async function checkServerError(currentId: number): Promise<void> {
+  const driveCarResponse = await driveCar(currentId, 'drive');
+  if (driveCarResponse.status === INTERNAL_SERVER_ERROR) {
+    cancelAnimationFrame(requestId);
+  }
+}
+
 export default function animateCar(currentId: number, duration: number): void {
   const currentCarImg = document.querySelector(`.car-img-${currentId}`) as HTMLElement;
   const endX = window.innerWidth - 160;
@@ -5,13 +17,16 @@ export default function animateCar(currentId: number, duration: number): void {
   const framesCount = (duration / 1000) * 60;
   const dx = (endX - currentCarImg.offsetLeft) / framesCount;
 
-  const tick = (): void => {
+  const tick = (): number => {
     currentX += dx;
     currentCarImg.style.transform = `translateX(${currentX}px)`;
     if (currentX < endX) {
-      requestAnimationFrame(tick);
+      requestId = requestAnimationFrame(tick);
     }
+
+    return requestId;
   };
 
+  checkServerError(currentId);
   tick();
 }
