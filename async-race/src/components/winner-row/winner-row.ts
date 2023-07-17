@@ -5,7 +5,7 @@ import store from '../../utils/store';
 import './winners-row.css';
 
 const createWinnerRow = ({ id, wins, time }: IWinner, index: number): void => {
-  const currentCar = store.carsArray.find((item) => item.id === id) as ICar;
+  const currentCar = store.fullCarsArray.find((item) => item.id === id) as ICar;
 
   createBasicElement({ tagName: 'tr', classNames: [`winner-row-${id}`, 'tr'], parentSelector: '.tbody' });
   createBasicElement({
@@ -23,7 +23,7 @@ const createWinnerRow = ({ id, wins, time }: IWinner, index: number): void => {
   createBasicElement({
     tagName: 'td',
     textContent: `${currentCar.name}`,
-    classNames: [`car-name-${id}`, 'car-name'],
+    classNames: [`car-name-${id}`, 'car-winner-name'],
     parentSelector: `.winner-row-${id}`,
   });
   createBasicElement({

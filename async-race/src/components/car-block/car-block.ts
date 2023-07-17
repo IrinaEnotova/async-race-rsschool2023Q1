@@ -29,23 +29,20 @@ const createSelectButton = (id: number): void => {
     classNames: ['car-btn', 'select-btn'],
     textContent: 'Select',
     parentSelector: `.btns-container-${id}`,
-    callback: (event: Event) => {
-      const target = event.target as HTMLElement;
-      const selectedId = target.getAttribute('data-index');
+    callback: () => {
       const nameInput = document.querySelector('.input-text_update') as HTMLInputElement;
       const colorInput = document.querySelector('.input-color_update') as HTMLInputElement;
       const updateBtn = document.querySelector('.btn-update') as HTMLButtonElement;
 
-      if (selectedId) {
-        store.selectedCarIndex = +selectedId - 1;
-        store.selectedCar = store.carsArray[store.selectedCarIndex];
-      }
+      const selectedCar = store.fullCarsArray.find((item) => item.id === id) as ICar;
+      store.selectedCar = selectedCar;
+
       nameInput.disabled = false;
       colorInput.disabled = false;
       updateBtn.disabled = false;
 
-      nameInput.value = store.selectedCar.name;
-      colorInput.value = store.selectedCar.color;
+      nameInput.value = selectedCar.name;
+      colorInput.value = selectedCar.color;
     },
     dataIndex: `${id}`,
   });
@@ -117,8 +114,13 @@ const createStopButton = (id: number): void => {
   });
 };
 
+// eslint-disable-next-line max-lines-per-function
 const createCarBlock = ({ name, color, id }: ICar): void => {
-  createBasicElement({ tagName: 'div', classNames: [`car-block-${id}`, 'car-block'], parentSelector: '.garage' });
+  createBasicElement({
+    tagName: 'div',
+    classNames: [`car-block-${id}`, 'car-block'],
+    parentSelector: '.cars-container',
+  });
   createBasicElement({
     tagName: 'div',
     classNames: [`car-info-${id}`, 'car-info'],

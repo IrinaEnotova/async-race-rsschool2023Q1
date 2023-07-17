@@ -161,6 +161,25 @@ export const PARAMS_NUM_OF_PAGE: IBasicElementParams = {
   parentSelector: '.garage',
 };
 
+export const PARAMS_WINNERS_MESSAGE: IBasicElementParams = {
+  tagName: 'div',
+  classNames: ['winner-message'],
+  textContent: '',
+  parentSelector: '.garage',
+};
+
+export const PARAMS_CARS_CONTAINER: IBasicElementParams = {
+  tagName: 'div',
+  classNames: ['cars-container'],
+  parentSelector: '.garage',
+};
+
+export const PARAMS_GARAGE_PAGINATION_WRAPPER = {
+  tagName: 'ul',
+  classNames: ['garage-pagination'],
+  parentSelector: '.garage-wrapper',
+};
+
 export const PARAMS_WINNERS: IBasicElementParams = {
   tagName: 'div',
   classNames: ['winners-wrapper', 'hidden'],

@@ -6,12 +6,12 @@ import {
 } from '../utils/consts';
 import createCarBlock from '../components/car-block/car-block';
 import store from '../utils/store';
-import { getCars } from './api-garage';
+import { getAllCars, getCars } from './api-garage';
 import { getWinners } from './api-winners';
 import createWinnerRow from '../components/winner-row/winner-row';
 
-export async function updateCarsStore(): Promise<void> {
-  const { items, count } = await getCars(store.carsPage);
+export async function updateCarsStore(page = store.carsPage): Promise<void> {
+  const { items, count } = await getCars(page);
   store.carsArray = items;
   store.carsCount = count;
 
@@ -22,8 +22,8 @@ export async function updateCarsStore(): Promise<void> {
   });
 }
 
-export async function updateWinnersStore(): Promise<void> {
-  const { items, count } = await getWinners(store.winnersPage);
+export async function updateWinnersStore(page = store.winnersPage): Promise<void> {
+  const { items, count } = await getWinners(page);
   store.winnersArray = items;
   store.winnersCount = count;
 
@@ -34,7 +34,8 @@ export async function updateWinnersStore(): Promise<void> {
   });
 }
 
-export async function updateState(): Promise<void> {
-  await updateCarsStore();
-  await updateWinnersStore();
+export async function updateState(garagePage = store.carsPage, winnersPage = store.winnersPage): Promise<void> {
+  await updateCarsStore(garagePage);
+  store.fullCarsArray = await getAllCars();
+  await updateWinnersStore(winnersPage);
 }

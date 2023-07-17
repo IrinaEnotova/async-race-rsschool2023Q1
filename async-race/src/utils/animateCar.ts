@@ -9,7 +9,6 @@ async function checkServerError(currentId: number): Promise<void> {
   const messageBlock = document.querySelector(`.car-engine-${currentId}`) as HTMLElement;
   if (driveCarResponse.status === INTERNAL_SERVER_ERROR) {
     cancelAnimationFrame(Number(requestIds[`${currentId}`]));
-    console.log(requestIds);
     messageBlock.textContent = 'The engine was broken!';
   }
 }
@@ -27,8 +26,6 @@ export function animateCar(currentId: number, duration: number): void {
     if (currentX < endX) {
       requestIds[`${currentId}`] = requestAnimationFrame(tick).toString();
     }
-    console.log(requestIds[`${currentId}`]);
-    // return requestIds;
   };
 
   checkServerError(currentId);

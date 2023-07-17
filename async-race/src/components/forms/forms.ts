@@ -44,27 +44,27 @@ async function updateDataAfterCreation(): Promise<void> {
   await updateState();
 }
 
-async function updateDataAfterUpdate(): Promise<void> {
-  createBasicElement(PARAMS_GARAGE_HEADING);
-  createBasicElement(PARAMS_NUM_OF_PAGE);
-  await updateState();
-}
+// async function updateDataAfterUpdate(): Promise<void> {
+//   createBasicElement(PARAMS_GARAGE_HEADING);
+//   createBasicElement(PARAMS_NUM_OF_PAGE);
+//   await updateState();
+// }
 
-function clearDataAfterUpdate(): void {
-  const nameInput = document.querySelector('.input-text_update') as HTMLInputElement;
-  const colorInput = document.querySelector('.input-color_update') as HTMLInputElement;
-  const updateBtn = document.querySelector('.btn-update') as HTMLButtonElement;
+// function clearDataAfterUpdate(): void {
+//   const nameInput = document.querySelector('.input-text_update') as HTMLInputElement;
+//   const colorInput = document.querySelector('.input-color_update') as HTMLInputElement;
+//   const updateBtn = document.querySelector('.btn-update') as HTMLButtonElement;
 
-  nameInput.value = '';
-  colorInput.value = '#000000';
+//   nameInput.value = '';
+//   colorInput.value = '#000000';
 
-  nameInput.disabled = true;
-  colorInput.disabled = true;
-  updateBtn.disabled = true;
+//   nameInput.disabled = true;
+//   colorInput.disabled = true;
+//   updateBtn.disabled = true;
 
-  store.selectedCarIndex = -1;
-  store.selectedCar = { name: 'none', color: '#000000', id: 0 };
-}
+//   store.selectedCarIndex = -1;
+//   store.selectedCar = { name: 'none', color: '#000000', id: 0 };
+// }
 
 const PARAMS_CREATE_BUTTON: IEventElementParams = {
   tagName: 'button',
@@ -102,11 +102,12 @@ export const PARAMS_UPDATE_BUTTON: IElementDisabled = {
     const { id } = store.selectedCar;
 
     updateCar(name, color, id);
-    clearDataAfterUpdate();
-    clearDataOnPage();
-    setTimeout(async () => {
-      await updateDataAfterUpdate();
-    }, 100);
+    window.location.reload();
+    // clearDataAfterUpdate();
+    // clearDataOnPage();
+    // setTimeout(async () => {
+    //   await updateDataAfterUpdate();
+    // }, 100);
   },
   disabled: true,
 };

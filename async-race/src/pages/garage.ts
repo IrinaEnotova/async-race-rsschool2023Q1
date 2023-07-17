@@ -4,18 +4,22 @@ import {
   PARAMS_GARAGE,
   PARAMS_GARAGE_HEADING,
   PARAMS_NUM_OF_PAGE,
+  PARAMS_WINNERS_MESSAGE,
+  PARAMS_CARS_CONTAINER,
   PARAMS_RACE_BTNS_CONTAINER,
   PARAMS_RACE_BTN,
   PARAMS_RESET_BTN,
+  PARAMS_GARAGE_PAGINATION_WRAPPER,
 } from '../utils/consts';
 import createForm from '../components/forms/forms';
 import { updateState } from '../api/api-update';
 import { IBasicElementParams } from '../types/interfaces';
 import generateRandomCars from '../utils/generateRandomCars';
-import './garage.css';
 import { createCar } from '../api/api-garage';
+import store from '../utils/store';
+import './garage.css';
 
-export const PARAMS_GENERATE_CARS: IBasicElementParams = {
+const PARAMS_GENERATE_CARS: IBasicElementParams = {
   tagName: 'button',
   classNames: ['generate-btn'],
   parentSelector: '.race-btns-container',
@@ -31,6 +35,15 @@ export const PARAMS_GENERATE_CARS: IBasicElementParams = {
   },
 };
 
+async function chooseGaragePage(num: number): Promise<void> {
+  const carsContainer = document.querySelector('.cars-container') as HTMLElement;
+  const page = document.querySelector('.garage_page-number') as HTMLElement;
+  carsContainer.innerHTML = '';
+  store.carsPage = num;
+  page.textContent = `Page #${store.carsPage}`;
+  await updateState(num);
+}
+
 const createGarage = async (): Promise<void> => {
   await updateState();
 
@@ -45,6 +58,28 @@ const createGarage = async (): Promise<void> => {
   createBasicElement(PARAMS_GARAGE);
   createBasicElement(PARAMS_GARAGE_HEADING);
   createBasicElement(PARAMS_NUM_OF_PAGE);
+  createBasicElement(PARAMS_WINNERS_MESSAGE);
+  createBasicElement(PARAMS_CARS_CONTAINER);
+
+  createBasicElement(PARAMS_GARAGE_PAGINATION_WRAPPER);
+  createBasicElement({
+    tagName: 'li',
+    classNames: ['page-item'],
+    textContent: '1',
+    parentSelector: '.garage-pagination',
+    callback: async () => {
+      await chooseGaragePage(1);
+    },
+  });
+  createBasicElement({
+    tagName: 'li',
+    classNames: ['page-item'],
+    textContent: '2',
+    parentSelector: '.garage-pagination',
+    callback: async () => {
+      await chooseGaragePage(2);
+    },
+  });
 
   await updateState();
 };

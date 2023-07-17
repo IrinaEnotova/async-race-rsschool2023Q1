@@ -3,6 +3,7 @@ import { IStore } from '../types/interfaces';
 const store: IStore = {
   carsPage: 1,
   carsArray: [],
+  fullCarsArray: [],
   carsCount: 0,
   selectedCarIndex: -1,
   selectedCar: { name: 'none', color: '#000000', id: 0 },
