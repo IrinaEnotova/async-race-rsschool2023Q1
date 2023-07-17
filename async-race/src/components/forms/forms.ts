@@ -5,8 +5,6 @@ import {
   PARAMS_FORM_UPDATE,
   PARAMS_INPUT_TEXT_UPDATE,
   PARAMS_INPUT_COLOR_UPDATE,
-  PARAMS_GARAGE_HEADING,
-  PARAMS_NUM_OF_PAGE,
 } from '../../utils/consts';
 import {
   createBasicElement,
@@ -16,55 +14,8 @@ import {
 } from '../../utils/createElements';
 import { IEventElementParams, IElementDisabled } from '../../types/interfaces';
 import { createCar, updateCar } from '../../api/api-garage';
-import { updateState } from '../../api/api-update';
 import store from '../../utils/store';
 import './forms.css';
-
-function clearDataOnPage(): void {
-  const garage = document.querySelector('.garage');
-  const winners = document.querySelector('.tbody');
-  const nameInput = document.querySelector('.input-text_create') as HTMLInputElement;
-  const colorInput = document.querySelector('.input-color_create') as HTMLInputElement;
-  nameInput.value = '';
-  colorInput.value = '#000000';
-
-  if (garage) {
-    garage.innerHTML = '';
-  }
-  if (winners) {
-    winners.innerHTML = '';
-  }
-}
-
-async function updateDataAfterCreation(): Promise<void> {
-  store.carsCount += 1;
-  PARAMS_GARAGE_HEADING.textContent = `Garage: ${store.carsCount} cars`;
-  createBasicElement(PARAMS_GARAGE_HEADING);
-  createBasicElement(PARAMS_NUM_OF_PAGE);
-  await updateState();
-}
-
-// async function updateDataAfterUpdate(): Promise<void> {
-//   createBasicElement(PARAMS_GARAGE_HEADING);
-//   createBasicElement(PARAMS_NUM_OF_PAGE);
-//   await updateState();
-// }
-
-// function clearDataAfterUpdate(): void {
-//   const nameInput = document.querySelector('.input-text_update') as HTMLInputElement;
-//   const colorInput = document.querySelector('.input-color_update') as HTMLInputElement;
-//   const updateBtn = document.querySelector('.btn-update') as HTMLButtonElement;
-
-//   nameInput.value = '';
-//   colorInput.value = '#000000';
-
-//   nameInput.disabled = true;
-//   colorInput.disabled = true;
-//   updateBtn.disabled = true;
-
-//   store.selectedCarIndex = -1;
-//   store.selectedCar = { name: 'none', color: '#000000', id: 0 };
-// }
 
 const PARAMS_CREATE_BUTTON: IEventElementParams = {
   tagName: 'button',
@@ -80,10 +31,7 @@ const PARAMS_CREATE_BUTTON: IEventElementParams = {
     const color = colorInput.value;
 
     createCar(name, color);
-    clearDataOnPage();
-    setTimeout(async () => {
-      await updateDataAfterCreation();
-    }, 100);
+    window.location.reload();
   },
 };
 

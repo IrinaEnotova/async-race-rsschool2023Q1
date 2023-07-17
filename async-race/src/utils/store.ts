@@ -2,6 +2,7 @@ import { IStore } from '../types/interfaces';
 
 const store: IStore = {
   carsPage: 1,
+  garagePageCount: 1,
   carsArray: [],
   fullCarsArray: [],
   carsCount: 0,

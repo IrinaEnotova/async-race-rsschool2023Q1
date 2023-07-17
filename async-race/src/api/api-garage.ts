@@ -6,7 +6,6 @@ export async function getAllCars(): Promise<ICar[]> {
   const response = await fetch(GARAGE_URL);
   const allCars = await response.json();
 
-  console.log(allCars);
   return allCars;
 }
 

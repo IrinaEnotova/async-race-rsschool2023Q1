@@ -3,6 +3,7 @@ import {
   PARAMS_NUM_OF_PAGE,
   PARAMS_WINNERS_HEADING,
   PARAMS_NUM_OF_PAGE_WINNERS,
+  CARS_PER_PAGE,
 } from '../utils/consts';
 import createCarBlock from '../components/car-block/car-block';
 import store from '../utils/store';
@@ -37,5 +38,7 @@ export async function updateWinnersStore(page = store.winnersPage): Promise<void
 export async function updateState(garagePage = store.carsPage, winnersPage = store.winnersPage): Promise<void> {
   await updateCarsStore(garagePage);
   store.fullCarsArray = await getAllCars();
+  store.garagePageCount = Math.ceil(store.fullCarsArray.length / CARS_PER_PAGE);
+  console.log(store);
   await updateWinnersStore(winnersPage);
 }

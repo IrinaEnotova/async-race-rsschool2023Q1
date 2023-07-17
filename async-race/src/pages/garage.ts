@@ -1,4 +1,4 @@
-import { createBasicElement } from '../utils/createElements';
+import { createBasicElement, createDisabledElement } from '../utils/createElements';
 import {
   PARAMS_GARAGE_WRAPPER,
   PARAMS_GARAGE,
@@ -13,7 +13,7 @@ import {
 } from '../utils/consts';
 import createForm from '../components/forms/forms';
 import { updateState } from '../api/api-update';
-import { IBasicElementParams } from '../types/interfaces';
+import { IBasicElementParams, IElementDisabled } from '../types/interfaces';
 import generateRandomCars from '../utils/generateRandomCars';
 import { createCar } from '../api/api-garage';
 import store from '../utils/store';
@@ -35,14 +35,65 @@ const PARAMS_GENERATE_CARS: IBasicElementParams = {
   },
 };
 
-async function chooseGaragePage(num: number): Promise<void> {
+export async function prevGaragePage(): Promise<void> {
   const carsContainer = document.querySelector('.cars-container') as HTMLElement;
+  const nextBtn = document.querySelector('.btn-next') as HTMLButtonElement;
   const page = document.querySelector('.garage_page-number') as HTMLElement;
   carsContainer.innerHTML = '';
-  store.carsPage = num;
-  page.textContent = `Page #${store.carsPage}`;
-  await updateState(num);
+  nextBtn.disabled = false;
+
+  const currentPage = store.carsPage - 1;
+  store.carsPage -= 1;
+  page.textContent = `Page #${currentPage}`;
+  console.log(store.carsPage);
+  await updateState(currentPage);
 }
+
+export async function nextGaragePage(): Promise<void> {
+  const carsContainer = document.querySelector('.cars-container') as HTMLElement;
+  const prevBtn = document.querySelector('.btn-prev') as HTMLButtonElement;
+  const page = document.querySelector('.garage_page-number') as HTMLElement;
+  carsContainer.innerHTML = '';
+  prevBtn.disabled = false;
+
+  const currentPage = store.carsPage + 1;
+  store.carsPage += 1;
+  page.textContent = `Page #${currentPage}`;
+  console.log(store.carsPage);
+  await updateState(currentPage);
+}
+
+const PARAMS_PREV_BTN: IElementDisabled = {
+  tagName: 'button',
+  classNames: ['page-item', 'btn-prev'],
+  textContent: 'Prev',
+  parentSelector: '.garage-pagination',
+  callback: async (event: Event) => {
+    const target = event.target as HTMLButtonElement;
+    if (store.carsPage < 3) {
+      target.disabled = true;
+    }
+
+    await prevGaragePage();
+  },
+  disabled: true,
+};
+
+const PARAMS_NEXT_BTN: IElementDisabled = {
+  tagName: 'button',
+  classNames: ['page-item', 'btn-next'],
+  textContent: 'Next',
+  parentSelector: '.garage-pagination',
+  callback: async (event: Event) => {
+    const target = event.target as HTMLButtonElement;
+    if (store.carsPage + 1 === store.garagePageCount) {
+      target.disabled = true;
+    }
+
+    await nextGaragePage();
+  },
+  disabled: false,
+};
 
 const createGarage = async (): Promise<void> => {
   await updateState();
@@ -62,24 +113,8 @@ const createGarage = async (): Promise<void> => {
   createBasicElement(PARAMS_CARS_CONTAINER);
 
   createBasicElement(PARAMS_GARAGE_PAGINATION_WRAPPER);
-  createBasicElement({
-    tagName: 'li',
-    classNames: ['page-item'],
-    textContent: '1',
-    parentSelector: '.garage-pagination',
-    callback: async () => {
-      await chooseGaragePage(1);
-    },
-  });
-  createBasicElement({
-    tagName: 'li',
-    classNames: ['page-item'],
-    textContent: '2',
-    parentSelector: '.garage-pagination',
-    callback: async () => {
-      await chooseGaragePage(2);
-    },
-  });
+  createDisabledElement(PARAMS_PREV_BTN);
+  createDisabledElement(PARAMS_NEXT_BTN);
 
   await updateState();
 };

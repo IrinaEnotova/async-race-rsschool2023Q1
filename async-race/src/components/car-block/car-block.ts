@@ -11,18 +11,6 @@ import { deleteCar, startEngine, switchCarEngine } from '../../api/api-garage';
 import { animateCar, requestIds } from '../../utils/animateCar';
 import './car-block.css';
 
-function clearDataOnPage(): void {
-  const garage = document.querySelector('.garage');
-  const winners = document.querySelector('.tbody');
-
-  if (garage) {
-    garage.innerHTML = '';
-  }
-  if (winners) {
-    winners.innerHTML = '';
-  }
-}
-
 const createSelectButton = (id: number): void => {
   createElementWithData({
     tagName: 'button',
@@ -58,7 +46,6 @@ const createDeleteButton = (id: number): void => {
       const target = event.target as HTMLElement;
       const selectedId = Number(target.getAttribute('data-index'));
 
-      clearDataOnPage();
       await deleteCar(selectedId);
       window.location.reload();
     },
@@ -114,7 +101,15 @@ const createStopButton = (id: number): void => {
   });
 };
 
-// eslint-disable-next-line max-lines-per-function
+const createCarEngine = (id: number): void => {
+  createBasicElement({
+    tagName: 'p',
+    classNames: [`car-engine-${id}`, 'car-engine'],
+    parentSelector: `.car-info-${id}`,
+    textContent: ``,
+  });
+};
+
 const createCarBlock = ({ name, color, id }: ICar): void => {
   createBasicElement({
     tagName: 'div',
@@ -133,12 +128,7 @@ const createCarBlock = ({ name, color, id }: ICar): void => {
     parentSelector: `.car-info-${id}`,
     textContent: `${name}`,
   });
-  createBasicElement({
-    tagName: 'p',
-    classNames: [`car-engine-${id}`, 'car-engine'],
-    parentSelector: `.car-info-${id}`,
-    textContent: ``,
-  });
+  createCarEngine(id);
   createBasicElement({
     tagName: 'div',
     classNames: [`btns-container-${id}`, 'btns-container'],

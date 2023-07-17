@@ -175,7 +175,7 @@ export const PARAMS_CARS_CONTAINER: IBasicElementParams = {
 };
 
 export const PARAMS_GARAGE_PAGINATION_WRAPPER = {
-  tagName: 'ul',
+  tagName: 'div',
   classNames: ['garage-pagination'],
   parentSelector: '.garage-wrapper',
 };

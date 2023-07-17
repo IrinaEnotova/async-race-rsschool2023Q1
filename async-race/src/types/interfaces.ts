@@ -64,6 +64,7 @@ export interface IWinners {
 
 export interface IStore {
   carsPage: number;
+  garagePageCount: number;
   carsArray: ICar[];
   fullCarsArray: ICar[];
   carsCount: number;
