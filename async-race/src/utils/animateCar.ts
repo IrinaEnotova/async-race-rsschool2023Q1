@@ -1,32 +1,34 @@
-import { driveCar } from '../api/api-garage';
+import { switchCarEngine } from '../api/api-garage';
 import { INTERNAL_SERVER_ERROR } from './consts';
+import { IRequestIds } from '../types/interfaces';
 
-let requestId = 0;
+export const requestIds: IRequestIds = {};
 
 async function checkServerError(currentId: number): Promise<void> {
-  const driveCarResponse = await driveCar(currentId, 'drive');
+  const driveCarResponse = await switchCarEngine(currentId, 'drive');
   const messageBlock = document.querySelector(`.car-engine-${currentId}`) as HTMLElement;
   if (driveCarResponse.status === INTERNAL_SERVER_ERROR) {
-    cancelAnimationFrame(requestId);
+    cancelAnimationFrame(Number(requestIds[`${currentId}`]));
+    console.log(requestIds);
     messageBlock.textContent = 'The engine was broken!';
   }
 }
 
-export default function animateCar(currentId: number, duration: number): void {
+export function animateCar(currentId: number, duration: number): void {
   const currentCarImg = document.querySelector(`.car-img-${currentId}`) as HTMLElement;
   const endX = window.innerWidth - 160;
   let currentX = currentCarImg.offsetLeft;
   const framesCount = (duration / 1000) * 60;
   const dx = (endX - currentCarImg.offsetLeft) / framesCount;
 
-  const tick = (): number => {
+  const tick = (): void => {
     currentX += dx;
     currentCarImg.style.transform = `translateX(${currentX}px)`;
     if (currentX < endX) {
-      requestId = requestAnimationFrame(tick);
+      requestIds[`${currentId}`] = requestAnimationFrame(tick).toString();
     }
-
-    return requestId;
+    console.log(requestIds[`${currentId}`]);
+    // return requestIds;
   };
 
   checkServerError(currentId);

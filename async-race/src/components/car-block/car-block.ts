@@ -7,8 +7,8 @@ import {
 import getCarImg from '../../utils/getCarImg';
 import { ICar } from '../../types/interfaces';
 import store from '../../utils/store';
-import { deleteCar, startEngine } from '../../api/api-garage';
-import animateCar from '../../utils/animateCar';
+import { deleteCar, startEngine, switchCarEngine } from '../../api/api-garage';
+import { animateCar, requestIds } from '../../utils/animateCar';
 import './car-block.css';
 
 function clearDataOnPage(): void {
@@ -78,9 +78,11 @@ const createStartButton = (id: number): void => {
     callback: async (event: Event) => {
       const target = event.target as HTMLButtonElement;
       const stopBtn = document.querySelector(`.stop-btn-${id}`) as HTMLButtonElement;
-      console.log(stopBtn);
+      const carEngine = document.querySelector(`.car-engine-${id}`) as HTMLElement;
       target.disabled = true;
       stopBtn.disabled = false;
+      carEngine.textContent = '';
+
       const { velocity, distance } = await startEngine(id, 'started');
       const duration = distance / velocity;
 
@@ -97,8 +99,18 @@ const createStopButton = (id: number): void => {
     classNames: ['car-btn', `stop-btn-${id}`],
     textContent: 'B',
     parentSelector: `.btns-container-${id}`,
-    callback: () => {
-      console.log('Stop engine');
+    callback: async (event: Event) => {
+      const target = event.target as HTMLButtonElement;
+      const startBtn = document.querySelector(`.start-btn-${id}`) as HTMLButtonElement;
+      const carImg = document.querySelector(`.car-img-${id}`) as HTMLElement;
+      const carEngine = document.querySelector(`.car-engine-${id}`) as HTMLElement;
+      target.disabled = true;
+      startBtn.disabled = false;
+
+      await switchCarEngine(id, 'stopped');
+      cancelAnimationFrame(Number(requestIds[`${id}`]));
+      carImg.style.transform = `translateX(0px)`;
+      carEngine.textContent = '';
     },
     dataIndex: `${id}`,
     disabled: true,

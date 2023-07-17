@@ -57,7 +57,7 @@ export async function startEngine(id: number, status: 'started' | 'stopped'): Pr
   return response.json();
 }
 
-export async function driveCar(id: number, status: 'drive'): Promise<Response> {
+export async function switchCarEngine(id: number, status: 'started' | 'stopped' | 'drive'): Promise<Response> {
   const response = await fetch(`${BASE_URL}/engine?id=${id}&status=${status}`, {
     method: Methods.PATCH,
   });

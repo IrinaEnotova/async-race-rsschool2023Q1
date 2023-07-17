@@ -73,3 +73,7 @@ export interface IStore {
   winnersCount: number;
   currentPage: 'garage' | 'winners';
 }
+
+export interface IRequestIds {
+  [key: string]: string;
+}
