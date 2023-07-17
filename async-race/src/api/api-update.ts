@@ -30,15 +30,22 @@ export async function updateWinnersStore(page = store.winnersPage): Promise<void
 
   PARAMS_WINNERS_HEADING.textContent = `Winners: ${count} ${count === 1 ? 'car' : 'cars'}`;
   PARAMS_NUM_OF_PAGE_WINNERS.textContent = `Page #${store.winnersPage}`;
+
   items.forEach((item, index) => {
     createWinnerRow(item, index);
   });
 }
 
-export async function updateState(garagePage = store.carsPage, winnersPage = store.winnersPage): Promise<void> {
+export async function updateStateGarage(garagePage = store.carsPage): Promise<void> {
   await updateCarsStore(garagePage);
   store.fullCarsArray = await getAllCars();
   store.garagePageCount = Math.ceil(store.fullCarsArray.length / CARS_PER_PAGE);
-  console.log(store);
+}
+
+export async function updateStateWinners(winnersPage = store.winnersPage): Promise<void> {
   await updateWinnersStore(winnersPage);
+
+  // ПЕРЕДЕЛАТЬ ДЛЯ СТРАНИЦЫ С ПОБЕДИТЕЛЯМИ
+  // store.fullCarsArray = await getAllCars();
+  // store.garagePageCount = Math.ceil(store.fullCarsArray.length / CARS_PER_PAGE);
 }

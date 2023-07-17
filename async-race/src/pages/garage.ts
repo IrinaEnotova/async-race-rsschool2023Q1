@@ -12,7 +12,8 @@ import {
   PARAMS_GARAGE_PAGINATION_WRAPPER,
 } from '../utils/consts';
 import createForm from '../components/forms/forms';
-import { updateState } from '../api/api-update';
+// import { updateState } from '../api/api-update';
+import { updateStateGarage } from '../api/api-update';
 import { IBasicElementParams, IElementDisabled } from '../types/interfaces';
 import generateRandomCars from '../utils/generateRandomCars';
 import { createCar } from '../api/api-garage';
@@ -46,7 +47,7 @@ export async function prevGaragePage(): Promise<void> {
   store.carsPage -= 1;
   page.textContent = `Page #${currentPage}`;
   console.log(store.carsPage);
-  await updateState(currentPage);
+  await updateStateGarage(currentPage);
 }
 
 export async function nextGaragePage(): Promise<void> {
@@ -60,7 +61,7 @@ export async function nextGaragePage(): Promise<void> {
   store.carsPage += 1;
   page.textContent = `Page #${currentPage}`;
   console.log(store.carsPage);
-  await updateState(currentPage);
+  await updateStateGarage(currentPage);
 }
 
 const PARAMS_PREV_BTN: IElementDisabled = {
@@ -89,14 +90,13 @@ const PARAMS_NEXT_BTN: IElementDisabled = {
     if (store.carsPage + 1 === store.garagePageCount) {
       target.disabled = true;
     }
-
     await nextGaragePage();
   },
   disabled: false,
 };
 
 const createGarage = async (): Promise<void> => {
-  await updateState();
+  await updateStateGarage();
 
   createBasicElement(PARAMS_GARAGE_WRAPPER);
   createForm('create');
@@ -116,7 +116,7 @@ const createGarage = async (): Promise<void> => {
   createDisabledElement(PARAMS_PREV_BTN);
   createDisabledElement(PARAMS_NEXT_BTN);
 
-  await updateState();
+  await updateStateGarage();
 };
 
 export default createGarage;

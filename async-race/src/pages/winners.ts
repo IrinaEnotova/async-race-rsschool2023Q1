@@ -9,11 +9,11 @@ import {
   PARAMS_TBODY,
 } from '../utils/consts';
 import { createBasicElement } from '../utils/createElements';
-import { updateState } from '../api/api-update';
+import { updateStateWinners } from '../api/api-update';
 import './winners.css';
 
 const createWinners = async (): Promise<void> => {
-  await updateState();
+  await updateStateWinners();
   createBasicElement(PARAMS_WINNERS);
   createBasicElement(PARAMS_WINNERS_HEADING);
   createBasicElement(PARAMS_NUM_OF_PAGE_WINNERS);
@@ -26,6 +26,7 @@ const createWinners = async (): Promise<void> => {
   createBasicElement({ ...PARAMS_TH_ITEM, textContent: 'Wins' });
   createBasicElement({ ...PARAMS_TH_ITEM, textContent: 'Best time (sec)' });
   createBasicElement(PARAMS_TBODY);
+  await updateStateWinners();
 };
 
 export default createWinners;

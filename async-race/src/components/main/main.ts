@@ -4,10 +4,10 @@ import { createBasicElement } from '../../utils/createElements';
 import './main.css';
 import createWinners from '../../pages/winners';
 
-const createMain = (): void => {
+const createMain = async (): Promise<void> => {
   createBasicElement(PARAMS_MAIN);
-  createGarage();
-  createWinners();
+  await createGarage();
+  await createWinners();
 };
 
 export default createMain;
