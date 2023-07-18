@@ -51,11 +51,6 @@ export const PARAMS_UPDATE_BUTTON: IElementDisabled = {
 
     updateCar(name, color, id);
     window.location.reload();
-    // clearDataAfterUpdate();
-    // clearDataOnPage();
-    // setTimeout(async () => {
-    //   await updateDataAfterUpdate();
-    // }, 100);
   },
   disabled: true,
 };
