@@ -121,26 +121,6 @@ export const PARAMS_RACE_BTNS_CONTAINER: IBasicElementParams = {
   parentSelector: '.garage-wrapper',
 };
 
-export const PARAMS_RACE_BTN: IBasicElementParams = {
-  tagName: 'button',
-  classNames: ['race-btn'],
-  parentSelector: '.race-btns-container',
-  textContent: 'Race',
-  callback: () => {
-    console.log('race!');
-  },
-};
-
-export const PARAMS_RESET_BTN: IBasicElementParams = {
-  tagName: 'button',
-  classNames: ['reset-btn'],
-  parentSelector: '.race-btns-container',
-  textContent: 'Reset',
-  callback: () => {
-    console.log('reset race');
-  },
-};
-
 export const PARAMS_GARAGE: IBasicElementParams = {
   tagName: 'div',
   classNames: ['garage'],

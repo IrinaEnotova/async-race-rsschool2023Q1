@@ -7,18 +7,63 @@ import {
   PARAMS_WINNERS_MESSAGE,
   PARAMS_CARS_CONTAINER,
   PARAMS_RACE_BTNS_CONTAINER,
-  PARAMS_RACE_BTN,
-  PARAMS_RESET_BTN,
   PARAMS_GARAGE_PAGINATION_WRAPPER,
 } from '../utils/consts';
 import createForm from '../components/forms/forms';
-// import { updateState } from '../api/api-update';
 import { updateStateGarage } from '../api/api-update';
 import { IBasicElementParams, IElementDisabled } from '../types/interfaces';
 import generateRandomCars from '../utils/generateRandomCars';
-import { createCar } from '../api/api-garage';
+import { createCar, startEngine, switchCarEngine } from '../api/api-garage';
+import { animateCar, requestIds } from '../utils/animateCar';
 import store from '../utils/store';
 import './garage.css';
+
+const PARAMS_RACE_BTN: IBasicElementParams = {
+  tagName: 'button',
+  classNames: ['race-btn'],
+  parentSelector: '.race-btns-container',
+  textContent: 'Race',
+  callback: async (event: Event) => {
+    const target = event.target as HTMLButtonElement;
+    const resetBtn = document.querySelector('.reset-btn') as HTMLButtonElement;
+    const dataCars = store.carsArray;
+    target.disabled = true;
+    resetBtn.disabled = false;
+
+    dataCars.forEach(async (car) => {
+      const { velocity, distance } = await startEngine(car.id, 'started');
+      const duration = distance / velocity;
+      animateCar(car.id, duration);
+    });
+  },
+};
+
+const PARAMS_RESET_BTN: IBasicElementParams = {
+  tagName: 'button',
+  classNames: ['reset-btn'],
+  parentSelector: '.race-btns-container',
+  textContent: 'Reset',
+  callback: async (event: Event) => {
+    console.log('reset race');
+
+    const target = event.target as HTMLButtonElement;
+    const raceBtn = document.querySelector('.race-btn') as HTMLButtonElement;
+    const dataCars = store.carsArray;
+    const carBlocks = document.querySelectorAll('.car-block');
+    target.disabled = true;
+    raceBtn.disabled = false;
+    dataCars.forEach(async (car) => {
+      await switchCarEngine(car.id, 'stopped');
+      cancelAnimationFrame(Number(requestIds[`${car.id}`]));
+      carBlocks.forEach((carBlock) => {
+        const carMessage = carBlock.childNodes[0].childNodes[1];
+        carMessage.textContent = '';
+        const carImg = carBlock.childNodes[2] as HTMLElement;
+        carImg.style.transform = `translateX(0px)`;
+      });
+    });
+  },
+};
 
 const PARAMS_GENERATE_CARS: IBasicElementParams = {
   tagName: 'button',
@@ -26,8 +71,6 @@ const PARAMS_GENERATE_CARS: IBasicElementParams = {
   parentSelector: '.race-btns-container',
   textContent: 'Generate cars',
   callback: () => {
-    console.log('genetate cars');
-
     const cars = generateRandomCars();
     cars.forEach(async (car) => {
       await createCar(car.name, car.color);
