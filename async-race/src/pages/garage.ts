@@ -38,11 +38,12 @@ const PARAMS_RACE_BTN: IBasicElementParams = {
   },
 };
 
-const PARAMS_RESET_BTN: IBasicElementParams = {
+const PARAMS_RESET_BTN: IElementDisabled = {
   tagName: 'button',
   classNames: ['reset-btn'],
   parentSelector: '.race-btns-container',
   textContent: 'Reset',
+  disabled: true,
   callback: async (event: Event) => {
     const target = event.target as HTMLButtonElement;
     const raceBtn = document.querySelector('.race-btn') as HTMLButtonElement;
@@ -81,8 +82,10 @@ async function prevGaragePage(): Promise<void> {
   const carsContainer = document.querySelector('.cars-container') as HTMLElement;
   const nextBtn = document.querySelector('.btn-next') as HTMLButtonElement;
   const page = document.querySelector('.garage_page-number') as HTMLElement;
+  const raceBtn = document.querySelector('.race-btn') as HTMLButtonElement;
   carsContainer.innerHTML = '';
   nextBtn.disabled = false;
+  raceBtn.disabled = false;
 
   const currentPage = store.carsPage - 1;
   store.carsPage -= 1;
@@ -95,8 +98,10 @@ async function nextGaragePage(): Promise<void> {
   const carsContainer = document.querySelector('.cars-container') as HTMLElement;
   const prevBtn = document.querySelector('.btn-prev') as HTMLButtonElement;
   const page = document.querySelector('.garage_page-number') as HTMLElement;
+  const raceBtn = document.querySelector('.race-btn') as HTMLButtonElement;
   carsContainer.innerHTML = '';
   prevBtn.disabled = false;
+  raceBtn.disabled = false;
 
   const currentPage = store.carsPage + 1;
   store.carsPage += 1;
@@ -115,7 +120,6 @@ const PARAMS_PREV_BTN: IElementDisabled = {
     if (store.carsPage < 3) {
       target.disabled = true;
     }
-
     await prevGaragePage();
   },
   disabled: true,

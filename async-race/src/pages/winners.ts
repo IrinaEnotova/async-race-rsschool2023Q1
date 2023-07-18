@@ -17,7 +17,7 @@ import './winners.css';
 
 async function prevWinnersPage(): Promise<void> {
   const winnersContainer = document.querySelector('.tbody') as HTMLElement;
-  const nextBtn = document.querySelector('.btn-next') as HTMLButtonElement;
+  const nextBtn = document.querySelector('.btn-next-winners') as HTMLButtonElement;
   const page = document.querySelector('.winners_page-number') as HTMLElement;
   winnersContainer.innerHTML = '';
   nextBtn.disabled = false;
@@ -25,13 +25,14 @@ async function prevWinnersPage(): Promise<void> {
   const currentPage = store.winnersPage - 1;
   store.winnersPage -= 1;
   page.textContent = `Page #${currentPage}`;
-  console.log(store.winnersPage);
+
   await updateStateWinners(currentPage);
 }
 
 async function nextWinnersPage(): Promise<void> {
   const winnersContainer = document.querySelector('.tbody') as HTMLElement;
-  const prevBtn = document.querySelector('.btn-prev') as HTMLButtonElement;
+  const prevBtn = document.querySelector('.btn-prev-winners') as HTMLButtonElement;
+  console.log(prevBtn);
   const page = document.querySelector('.winners_page-number') as HTMLElement;
   winnersContainer.innerHTML = '';
   prevBtn.disabled = false;
@@ -39,13 +40,13 @@ async function nextWinnersPage(): Promise<void> {
   const currentPage = store.winnersPage + 1;
   store.winnersPage += 1;
   page.textContent = `Page #${currentPage}`;
-  console.log(store.winnersPage);
+
   await updateStateWinners(currentPage);
 }
 
 const PARAMS_PREV_BTN: IElementDisabled = {
   tagName: 'button',
-  classNames: ['page-item', 'btn-prev'],
+  classNames: ['page-item', 'btn-prev-winners'],
   textContent: 'Prev',
   parentSelector: '.winners-pagination',
   callback: async (event: Event) => {
@@ -60,7 +61,7 @@ const PARAMS_PREV_BTN: IElementDisabled = {
 
 const PARAMS_NEXT_BTN: IElementDisabled = {
   tagName: 'button',
-  classNames: ['page-item', 'btn-next'],
+  classNames: ['page-item', 'btn-next-winners'],
   textContent: 'Next',
   parentSelector: '.winners-pagination',
   callback: async (event: Event) => {

@@ -10,6 +10,7 @@ import store from '../../utils/store';
 import { deleteCar, startEngine, switchCarEngine } from '../../api/api-garage';
 import { animateCar, requestIds } from '../../utils/animateCar';
 import './car-block.css';
+import { deleteWinner } from '../../api/api-winners';
 
 const createSelectButton = (id: number): void => {
   createElementWithData({
@@ -47,6 +48,7 @@ const createDeleteButton = (id: number): void => {
       const selectedId = Number(target.getAttribute('data-index'));
 
       await deleteCar(selectedId);
+      await deleteWinner(selectedId);
       window.location.reload();
     },
     dataIndex: `${id}`,
