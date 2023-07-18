@@ -44,8 +44,6 @@ const PARAMS_RESET_BTN: IBasicElementParams = {
   parentSelector: '.race-btns-container',
   textContent: 'Reset',
   callback: async (event: Event) => {
-    console.log('reset race');
-
     const target = event.target as HTMLButtonElement;
     const raceBtn = document.querySelector('.race-btn') as HTMLButtonElement;
     const dataCars = store.carsArray;
@@ -79,7 +77,7 @@ const PARAMS_GENERATE_CARS: IBasicElementParams = {
   },
 };
 
-export async function prevGaragePage(): Promise<void> {
+async function prevGaragePage(): Promise<void> {
   const carsContainer = document.querySelector('.cars-container') as HTMLElement;
   const nextBtn = document.querySelector('.btn-next') as HTMLButtonElement;
   const page = document.querySelector('.garage_page-number') as HTMLElement;
@@ -89,11 +87,11 @@ export async function prevGaragePage(): Promise<void> {
   const currentPage = store.carsPage - 1;
   store.carsPage -= 1;
   page.textContent = `Page #${currentPage}`;
-  console.log(store.carsPage);
+
   await updateStateGarage(currentPage);
 }
 
-export async function nextGaragePage(): Promise<void> {
+async function nextGaragePage(): Promise<void> {
   const carsContainer = document.querySelector('.cars-container') as HTMLElement;
   const prevBtn = document.querySelector('.btn-prev') as HTMLButtonElement;
   const page = document.querySelector('.garage_page-number') as HTMLElement;
@@ -103,7 +101,7 @@ export async function nextGaragePage(): Promise<void> {
   const currentPage = store.carsPage + 1;
   store.carsPage += 1;
   page.textContent = `Page #${currentPage}`;
-  console.log(store.carsPage);
+
   await updateStateGarage(currentPage);
 }
 
@@ -156,8 +154,10 @@ const createGarage = async (): Promise<void> => {
   createBasicElement(PARAMS_CARS_CONTAINER);
 
   createBasicElement(PARAMS_GARAGE_PAGINATION_WRAPPER);
-  createDisabledElement(PARAMS_PREV_BTN);
-  createDisabledElement(PARAMS_NEXT_BTN);
+  if (store.garagePageCount > 1) {
+    createDisabledElement(PARAMS_PREV_BTN);
+    createDisabledElement(PARAMS_NEXT_BTN);
+  }
 
   await updateStateGarage();
 };

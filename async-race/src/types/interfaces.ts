@@ -71,7 +71,9 @@ export interface IStore {
   selectedCarIndex: number;
   selectedCar: ICar;
   winnersPage: number;
+  winnersPageCount: number;
   winnersArray: IWinner[];
+  fullWinnersArray: IWinner[];
   winnersCount: number;
   currentPage: 'garage' | 'winners';
 }

@@ -2,6 +2,13 @@ import { WINNERS_PER_PAGE, WINNERS_URL } from '../utils/consts';
 import { ICar, IWinner, IWinners } from '../types/interfaces';
 import Methods from '../types/enums';
 
+export async function getAllWinners(): Promise<IWinner[]> {
+  const response = await fetch(WINNERS_URL);
+  const allWinners = await response.json();
+
+  return allWinners;
+}
+
 export async function getWinners(page: number, limit = WINNERS_PER_PAGE, sort = '', order = ''): Promise<IWinners> {
   const response = await fetch(`${WINNERS_URL}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`);
   const winners = {

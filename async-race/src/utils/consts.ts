@@ -211,6 +211,12 @@ export const PARAMS_TBODY: IBasicElementParams = {
   parentSelector: '.table',
 };
 
+export const PARAMS_WINNERS_PAGINATION_WRAPPER = {
+  tagName: 'div',
+  classNames: ['winners-pagination'],
+  parentSelector: '.winners-wrapper',
+};
+
 export const PARAMS_FOOTER: IBasicElementParams = {
   tagName: 'footer',
   classNames: ['footer'],

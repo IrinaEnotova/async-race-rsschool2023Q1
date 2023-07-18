@@ -4,11 +4,12 @@ import {
   PARAMS_WINNERS_HEADING,
   PARAMS_NUM_OF_PAGE_WINNERS,
   CARS_PER_PAGE,
+  WINNERS_PER_PAGE,
 } from '../utils/consts';
 import createCarBlock from '../components/car-block/car-block';
 import store from '../utils/store';
 import { getAllCars, getCars } from './api-garage';
-import { getWinners } from './api-winners';
+import { getWinners, getAllWinners } from './api-winners';
 import createWinnerRow from '../components/winner-row/winner-row';
 
 export async function updateCarsStore(page = store.carsPage): Promise<void> {
@@ -45,7 +46,6 @@ export async function updateStateGarage(garagePage = store.carsPage): Promise<vo
 export async function updateStateWinners(winnersPage = store.winnersPage): Promise<void> {
   await updateWinnersStore(winnersPage);
 
-  // ПЕРЕДЕЛАТЬ ДЛЯ СТРАНИЦЫ С ПОБЕДИТЕЛЯМИ
-  // store.fullCarsArray = await getAllCars();
-  // store.garagePageCount = Math.ceil(store.fullCarsArray.length / CARS_PER_PAGE);
+  store.fullWinnersArray = await getAllWinners();
+  store.winnersPageCount = Math.ceil(store.fullWinnersArray.length / WINNERS_PER_PAGE);
 }

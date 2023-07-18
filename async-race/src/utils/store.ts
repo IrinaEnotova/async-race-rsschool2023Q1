@@ -9,7 +9,9 @@ const store: IStore = {
   selectedCarIndex: -1,
   selectedCar: { name: 'none', color: '#000000', id: 0 },
   winnersPage: 1,
+  winnersPageCount: 1,
   winnersArray: [],
+  fullWinnersArray: [],
   winnersCount: 0,
   currentPage: 'garage',
 };
