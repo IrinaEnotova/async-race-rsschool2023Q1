@@ -234,6 +234,9 @@ export const PARAMS_FOOTER_YEAR: IBasicElementParams = {
   textContent: '2023',
   classNames: ['footer_year'],
   parentSelector: '.footer',
+  callback: () => {
+    console.log(store.sortedCars);
+  },
 };
 
 export const PARAMS_FOOTER_RS_LOGO: IBasicElementParams = {

@@ -14,6 +14,8 @@ const store: IStore = {
   fullWinnersArray: [],
   winnersCount: 0,
   currentPage: 'garage',
+  raceCars: {},
+  sortedCars: [],
 };
 
 export default store;

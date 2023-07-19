@@ -18,6 +18,8 @@ import { animateCar, requestIds } from '../utils/animateCar';
 import store from '../utils/store';
 import './garage.css';
 
+// export const raceCars: IRaceCars = {};
+
 const PARAMS_RACE_BTN: IBasicElementParams = {
   tagName: 'button',
   classNames: ['race-btn'],
@@ -30,10 +32,30 @@ const PARAMS_RACE_BTN: IBasicElementParams = {
     target.disabled = true;
     resetBtn.disabled = false;
 
-    dataCars.forEach(async (car) => {
-      const { velocity, distance } = await startEngine(car.id, 'started');
-      const duration = distance / velocity;
-      animateCar(car.id, duration);
+    await Promise.all(
+      dataCars.map(async (car) => {
+        const { velocity, distance } = await startEngine(car.id, 'started');
+        const { id, name } = car;
+        const resultDuration = Number((distance / velocity / 1000).toFixed(2));
+        store.raceCars[`${id}`] = resultDuration;
+        store.sortedCars = Object.entries(store.raceCars).sort((a, b) => a[1] - b[1]);
+
+        const duration = distance / velocity;
+        return { id, name, duration };
+      }),
+    ).then((cars) => {
+      cars.forEach((car) => {
+        const { id, duration } = car;
+        animateCar(id, duration);
+      });
+      const checkingTime = store.sortedCars[0][1];
+      setTimeout(() => {
+        const winnerMessage = document.querySelector('.winner-message') as HTMLElement;
+        const winnerId = store.sortedCars[0][0];
+        const winnerTime = store.sortedCars[0][1];
+        const winnerCar = store.carsArray.find((car) => car.id === Number(winnerId));
+        winnerMessage.textContent = `The winner is ${winnerCar?.name} with ${winnerTime}sec`;
+      }, checkingTime * 2000);
     });
   },
 };
@@ -49,8 +71,13 @@ const PARAMS_RESET_BTN: IElementDisabled = {
     const raceBtn = document.querySelector('.race-btn') as HTMLButtonElement;
     const dataCars = store.carsArray;
     const carBlocks = document.querySelectorAll('.car-block');
+    const winnerMessage = document.querySelector('.winner-message') as HTMLElement;
     target.disabled = true;
     raceBtn.disabled = false;
+
+    store.raceCars = {};
+    store.sortedCars = [];
+    winnerMessage.textContent = '';
     dataCars.forEach(async (car) => {
       await switchCarEngine(car.id, 'stopped');
       cancelAnimationFrame(Number(requestIds[`${car.id}`]));

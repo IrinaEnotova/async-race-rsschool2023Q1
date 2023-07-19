@@ -62,6 +62,10 @@ export interface IWinners {
   count: number;
 }
 
+export interface IRaceCars {
+  [key: string]: number;
+}
+
 export interface IStore {
   carsPage: number;
   garagePageCount: number;
@@ -76,6 +80,8 @@ export interface IStore {
   fullWinnersArray: IWinner[];
   winnersCount: number;
   currentPage: 'garage' | 'winners';
+  raceCars: IRaceCars;
+  sortedCars: [string, number][];
 }
 
 export interface IRequestIds {
