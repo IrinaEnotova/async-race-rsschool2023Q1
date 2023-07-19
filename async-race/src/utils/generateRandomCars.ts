@@ -34,7 +34,7 @@ const generateNewCar = (): ICarWithoutId => {
 
 const generateRandomCars = (): ICarWithoutId[] => {
   const cars = [];
-  for (let i = 0; i < 3; i += 1) {
+  for (let i = 0; i < 100; i += 1) {
     cars.push(generateNewCar());
   }
 

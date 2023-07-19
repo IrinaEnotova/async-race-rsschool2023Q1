@@ -115,12 +115,16 @@ const PARAMS_GENERATE_CARS: IBasicElementParams = {
   classNames: ['generate-btn'],
   parentSelector: '.race-btns-container',
   textContent: 'Generate cars',
-  callback: () => {
+  callback: async () => {
+    const carsContainer = document.querySelector('.cars-container') as HTMLElement;
+    const carsCount = document.querySelector('.garage-heading') as HTMLElement;
+    carsCount.textContent = `Garage: ${store.carsCount + 100} ${store.carsCount === 1 ? 'car' : 'cars'}`;
     const cars = generateRandomCars();
+    carsContainer.textContent = '';
     cars.forEach(async (car) => {
       await createCar(car.name, car.color);
     });
-    window.location.reload();
+    await updateStateGarage();
   },
 };
 

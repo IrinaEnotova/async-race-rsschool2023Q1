@@ -16,6 +16,7 @@ import { IEventElementParams, IElementDisabled } from '../../types/interfaces';
 import { createCar, updateCar } from '../../api/api-garage';
 import store from '../../utils/store';
 import './forms.css';
+import { updateStateGarage, updateStateWinners } from '../../api/api-update';
 
 const PARAMS_CREATE_BUTTON: IEventElementParams = {
   tagName: 'button',
@@ -25,13 +26,17 @@ const PARAMS_CREATE_BUTTON: IEventElementParams = {
   callback: async (event: Event) => {
     event.preventDefault();
 
+    const carsContainer = document.querySelector('.cars-container') as HTMLElement;
+    const carsCount = document.querySelector('.garage-heading') as HTMLElement;
     const nameInput = document.querySelector('.input-text_create') as HTMLInputElement;
     const colorInput = document.querySelector('.input-color_create') as HTMLInputElement;
     const name = nameInput.value;
     const color = colorInput.value;
+    carsCount.textContent = `Garage: ${store.carsCount + 1} ${store.carsCount === 1 ? 'car' : 'cars'}`;
+    carsContainer.textContent = '';
 
-    createCar(name, color);
-    window.location.reload();
+    await createCar(name, color);
+    await updateStateGarage();
   },
 };
 
@@ -43,14 +48,25 @@ export const PARAMS_UPDATE_BUTTON: IElementDisabled = {
   callback: async (event: Event) => {
     event?.preventDefault();
 
+    const target = event.target as HTMLButtonElement;
+    const carsContainer = document.querySelector('.cars-container') as HTMLElement;
+    const tbody = document.querySelector('.tbody') as HTMLElement;
     const nameInput = document.querySelector('.input-text_update') as HTMLInputElement;
     const colorInput = document.querySelector('.input-color_update') as HTMLInputElement;
     const name = nameInput.value;
     const color = colorInput.value;
     const { id } = store.selectedCar;
 
-    updateCar(name, color, id);
-    window.location.reload();
+    await updateCar(name, color, id);
+    nameInput.value = '';
+    colorInput.value = '';
+    nameInput.disabled = true;
+    colorInput.disabled = true;
+    target.disabled = true;
+    carsContainer.textContent = '';
+    await updateStateGarage();
+    tbody.textContent = '';
+    await updateStateWinners();
   },
   disabled: true,
 };
