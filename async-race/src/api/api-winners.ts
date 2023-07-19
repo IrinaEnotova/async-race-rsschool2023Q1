@@ -9,7 +9,12 @@ export async function getAllWinners(): Promise<IWinner[]> {
   return allWinners;
 }
 
-export async function getWinners(page: number, limit = WINNERS_PER_PAGE, sort = '', order = ''): Promise<IWinners> {
+export async function getWinners(
+  page: number,
+  limit = WINNERS_PER_PAGE,
+  sort = 'time',
+  order = 'asc',
+): Promise<IWinners> {
   const response = await fetch(`${WINNERS_URL}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`);
   const winners = {
     items: await response.json(),

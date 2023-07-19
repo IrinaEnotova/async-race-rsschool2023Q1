@@ -24,8 +24,13 @@ export async function updateCarsStore(page = store.carsPage): Promise<void> {
   });
 }
 
-export async function updateWinnersStore(page = store.winnersPage): Promise<void> {
-  const { items, count } = await getWinners(page);
+export async function updateWinnersStore(
+  page = store.winnersPage,
+  limit = WINNERS_PER_PAGE,
+  sort = 'time',
+  order = 'asc',
+): Promise<void> {
+  const { items, count } = await getWinners(page, limit, sort, order);
   store.winnersArray = items;
   store.winnersCount = count;
 
@@ -43,8 +48,13 @@ export async function updateStateGarage(garagePage = store.carsPage): Promise<vo
   store.garagePageCount = Math.ceil(store.fullCarsArray.length / CARS_PER_PAGE);
 }
 
-export async function updateStateWinners(winnersPage = store.winnersPage): Promise<void> {
-  await updateWinnersStore(winnersPage);
+export async function updateStateWinners(
+  winnersPage = store.winnersPage,
+  limit = WINNERS_PER_PAGE,
+  sort = 'time',
+  order = 'asc',
+): Promise<void> {
+  await updateWinnersStore(winnersPage, limit, sort, order);
 
   store.fullWinnersArray = await getAllWinners();
   store.winnersPageCount = Math.ceil(store.fullWinnersArray.length / WINNERS_PER_PAGE);

@@ -43,6 +43,18 @@
   background: #f8f8f8 !important;
 }
 
+table th.th-wins,
+table th.th-time {
+  padding-right: 40px;
+  background: center right 5% / 20px 20px no-repeat url('../images/arrow.png'), #ffd300;
+  cursor: pointer;
+}
+
+.asc,
+.desc {
+  color: #095619;
+}
+
 .winners-pagination {
   display: flex;
   gap: 18px;

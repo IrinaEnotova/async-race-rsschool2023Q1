@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import {
   PARAMS_WINNERS,
   PARAMS_WINNERS_HEADING,
@@ -8,12 +9,57 @@ import {
   PARAMS_TH_ITEM,
   PARAMS_TBODY,
   PARAMS_WINNERS_PAGINATION_WRAPPER,
+  WINNERS_PER_PAGE,
 } from '../utils/consts';
 import { createBasicElement, createDisabledElement } from '../utils/createElements';
 import { updateStateWinners } from '../api/api-update';
 import store from '../utils/store';
 import { IElementDisabled } from '../types/interfaces';
 import './winners.css';
+
+async function chooseWinsSorting(event: Event): Promise<void> {
+  const target = event.target as HTMLElement;
+  const tbody = document.querySelector('.tbody') as HTMLElement;
+  const timeColumn = document.querySelector('.th-time') as HTMLElement;
+  tbody.textContent = '';
+  timeColumn.classList.remove('desc');
+  timeColumn.classList.remove('asc');
+
+  if (!target.classList.contains('asc') && !target.classList.contains('desc')) {
+    target.classList.add('desc');
+    await updateStateWinners(store.winnersPage, WINNERS_PER_PAGE, 'wins', 'desc');
+  } else if (target.classList.contains('desc')) {
+    target.classList.add('asc');
+    target.classList.remove('desc');
+    await updateStateWinners(store.winnersPage, WINNERS_PER_PAGE, 'wins', 'asc');
+  } else {
+    target.classList.add('desc');
+    target.classList.remove('asc');
+    await updateStateWinners(store.winnersPage, WINNERS_PER_PAGE, 'wins', 'desc');
+  }
+}
+
+async function chooseTimeSorting(event: Event): Promise<void> {
+  const target = event.target as HTMLElement;
+  const tbody = document.querySelector('.tbody') as HTMLElement;
+  const winsColumn = document.querySelector('.th-wins') as HTMLElement;
+  tbody.textContent = '';
+  winsColumn.classList.remove('desc');
+  winsColumn.classList.remove('asc');
+
+  if (!target.classList.contains('asc') && !target.classList.contains('desc')) {
+    target.classList.add('desc');
+    await updateStateWinners(store.winnersPage, WINNERS_PER_PAGE, 'time', 'desc');
+  } else if (target.classList.contains('desc')) {
+    target.classList.add('asc');
+    target.classList.remove('desc');
+    await updateStateWinners(store.winnersPage, WINNERS_PER_PAGE, 'time', 'asc');
+  } else {
+    target.classList.add('desc');
+    target.classList.remove('asc');
+    await updateStateWinners(store.winnersPage, WINNERS_PER_PAGE, 'time', 'desc');
+  }
+}
 
 async function prevWinnersPage(): Promise<void> {
   const winnersContainer = document.querySelector('.tbody') as HTMLElement;
@@ -85,8 +131,22 @@ const createWinners = async (): Promise<void> => {
   createBasicElement({ ...PARAMS_TH_ITEM, textContent: 'Number' });
   createBasicElement({ ...PARAMS_TH_ITEM, textContent: 'Car' });
   createBasicElement({ ...PARAMS_TH_ITEM, textContent: 'Name' });
-  createBasicElement({ ...PARAMS_TH_ITEM, textContent: 'Wins' });
-  createBasicElement({ ...PARAMS_TH_ITEM, textContent: 'Best time (sec)' });
+  createBasicElement({
+    ...PARAMS_TH_ITEM,
+    textContent: 'Wins',
+    classNames: ['th-wins'],
+    callback: async (event: Event) => {
+      await chooseWinsSorting(event);
+    },
+  });
+  createBasicElement({
+    ...PARAMS_TH_ITEM,
+    textContent: 'Best time (sec)',
+    classNames: ['th-time', 'desc'],
+    callback: async (event: Event) => {
+      await chooseTimeSorting(event);
+    },
+  });
   createBasicElement(PARAMS_TBODY);
   createBasicElement(PARAMS_WINNERS_PAGINATION_WRAPPER);
   if (store.winnersPageCount > 1) {
