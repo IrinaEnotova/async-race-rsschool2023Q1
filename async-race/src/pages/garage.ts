@@ -10,15 +10,38 @@ import {
   PARAMS_GARAGE_PAGINATION_WRAPPER,
 } from '../utils/consts';
 import createForm from '../components/forms/forms';
-import { updateStateGarage } from '../api/api-update';
+import { updateStateGarage, updateStateWinners } from '../api/api-update';
 import { IBasicElementParams, IElementDisabled } from '../types/interfaces';
 import generateRandomCars from '../utils/generateRandomCars';
 import { createCar, startEngine, switchCarEngine } from '../api/api-garage';
 import { animateCar, requestIds } from '../utils/animateCar';
 import store from '../utils/store';
 import './garage.css';
+import { createWinner, getWinner, updateWinner } from '../api/api-winners';
 
-// export const raceCars: IRaceCars = {};
+async function checkWinner(): Promise<void> {
+  const winnerMessage = document.querySelector('.winner-message') as HTMLElement;
+  const winnerId = store.sortedCars[0][0];
+  const winnerTime = store.sortedCars[0][1];
+  const winnerCar = store.carsArray.find((car) => car.id === Number(winnerId));
+
+  winnerMessage.textContent = `The winner is ${winnerCar?.name} with ${winnerTime}sec`;
+  const winners = document.querySelector('.tbody') as HTMLElement;
+  winners.textContent = '';
+  const winnerInDB = store.winnersArray.find((winner) => {
+    return winner.id === Number(winnerId);
+  });
+  if (winnerInDB) {
+    const winnerInfo = await getWinner(winnerInDB.id);
+    const currentWins = winnerInfo.wins + 1;
+    const currentTime = winnerInfo.time > winnerTime ? winnerTime : winnerInfo.time;
+    await updateWinner(winnerInDB.id, { wins: currentWins, time: currentTime });
+    await updateStateWinners();
+  } else {
+    await createWinner(Number(winnerId), 1, winnerTime);
+    await updateStateWinners();
+  }
+}
 
 const PARAMS_RACE_BTN: IBasicElementParams = {
   tagName: 'button',
@@ -49,12 +72,8 @@ const PARAMS_RACE_BTN: IBasicElementParams = {
         animateCar(id, duration);
       });
       const checkingTime = store.sortedCars[0][1];
-      setTimeout(() => {
-        const winnerMessage = document.querySelector('.winner-message') as HTMLElement;
-        const winnerId = store.sortedCars[0][0];
-        const winnerTime = store.sortedCars[0][1];
-        const winnerCar = store.carsArray.find((car) => car.id === Number(winnerId));
-        winnerMessage.textContent = `The winner is ${winnerCar?.name} with ${winnerTime}sec`;
+      setTimeout(async () => {
+        await checkWinner();
       }, checkingTime * 2000);
     });
   },

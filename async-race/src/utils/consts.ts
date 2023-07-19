@@ -235,7 +235,7 @@ export const PARAMS_FOOTER_YEAR: IBasicElementParams = {
   classNames: ['footer_year'],
   parentSelector: '.footer',
   callback: () => {
-    console.log(store.sortedCars);
+    console.log(store.winnersArray);
   },
 };
 
