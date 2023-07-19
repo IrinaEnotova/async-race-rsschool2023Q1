@@ -6,6 +6,7 @@ import {
   CARS_PER_PAGE,
   WINNERS_PER_PAGE,
 } from '../utils/consts';
+// eslint-disable-next-line import/no-cycle
 import createCarBlock from '../components/car-block/car-block';
 import store from '../utils/store';
 import { getAllCars, getCars } from './api-garage';
