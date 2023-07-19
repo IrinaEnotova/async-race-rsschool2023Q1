@@ -24,6 +24,13 @@ async function checkWinner(): Promise<void> {
   const winnerId = store.sortedCars[0][0];
   const winnerTime = store.sortedCars[0][1];
   const winnerCar = store.carsArray.find((car) => car.id === Number(winnerId));
+  const winnersCount = document.querySelector('.winners-heading') as HTMLElement;
+  const winnerFromTable = store.winnersArray.find((winner) => {
+    return Number(winnerId) === winner.id;
+  });
+  if (!winnerFromTable) {
+    winnersCount.textContent = `Winners: ${store.winnersCount + 1} ${store.winnersCount === 1 ? 'car' : 'cars'}`;
+  }
 
   winnerMessage.textContent = `The winner is ${winnerCar?.name} with ${winnerTime}sec`;
   const winners = document.querySelector('.tbody') as HTMLElement;

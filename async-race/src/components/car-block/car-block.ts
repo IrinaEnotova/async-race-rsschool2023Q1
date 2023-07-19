@@ -11,6 +11,8 @@ import { deleteCar, startEngine, switchCarEngine } from '../../api/api-garage';
 import { animateCar, requestIds } from '../../utils/animateCar';
 import './car-block.css';
 import { deleteWinner } from '../../api/api-winners';
+// eslint-disable-next-line import/no-cycle
+import { updateStateGarage, updateStateWinners } from '../../api/api-update';
 
 const createSelectButton = (id: number): void => {
   createElementWithData({
@@ -44,12 +46,27 @@ const createDeleteButton = (id: number): void => {
     textContent: 'Delete',
     parentSelector: `.btns-container-${id}`,
     callback: async (event: Event) => {
+      const carsContainer = document.querySelector('.cars-container') as HTMLElement;
+      const carsCount = document.querySelector('.garage-heading') as HTMLElement;
+      const winnersCount = document.querySelector('.winners-heading') as HTMLElement;
+      const tbody = document.querySelector('.tbody') as HTMLElement;
+      carsCount.textContent = `Garage: ${store.carsCount - 1} ${store.carsCount === 1 ? 'car' : 'cars'}`;
+
+      carsContainer.textContent = '';
+      tbody.textContent = '';
+
       const target = event.target as HTMLElement;
       const selectedId = Number(target.getAttribute('data-index'));
-
+      const winnerCar = store.winnersArray.find((winner) => {
+        return selectedId === winner.id;
+      });
+      if (winnerCar) {
+        winnersCount.textContent = `Winners: ${store.winnersCount - 1} ${store.winnersCount === 1 ? 'car' : 'cars'}`;
+      }
       await deleteCar(selectedId);
       await deleteWinner(selectedId);
-      window.location.reload();
+      await updateStateGarage();
+      await updateStateWinners();
     },
     dataIndex: `${id}`,
   });
