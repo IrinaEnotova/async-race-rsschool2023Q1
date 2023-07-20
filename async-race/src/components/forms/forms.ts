@@ -59,7 +59,7 @@ export const PARAMS_UPDATE_BUTTON: IElementDisabled = {
 
     await updateCar(name, color, id);
     nameInput.value = '';
-    colorInput.value = '';
+    colorInput.value = '#000000';
     nameInput.disabled = true;
     colorInput.disabled = true;
     target.disabled = true;

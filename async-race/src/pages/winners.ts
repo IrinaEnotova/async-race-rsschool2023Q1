@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import {
   PARAMS_WINNERS,
   PARAMS_WINNERS_HEADING,
@@ -78,7 +77,6 @@ async function prevWinnersPage(): Promise<void> {
 async function nextWinnersPage(): Promise<void> {
   const winnersContainer = document.querySelector('.tbody') as HTMLElement;
   const prevBtn = document.querySelector('.btn-prev-winners') as HTMLButtonElement;
-  console.log(prevBtn);
   const page = document.querySelector('.winners_page-number') as HTMLElement;
   winnersContainer.innerHTML = '';
   prevBtn.disabled = false;
@@ -149,10 +147,8 @@ const createWinners = async (): Promise<void> => {
   });
   createBasicElement(PARAMS_TBODY);
   createBasicElement(PARAMS_WINNERS_PAGINATION_WRAPPER);
-  if (store.winnersPageCount > 1) {
-    createDisabledElement(PARAMS_PREV_BTN);
-    createDisabledElement(PARAMS_NEXT_BTN);
-  }
+  createDisabledElement(PARAMS_PREV_BTN);
+  createDisabledElement(PARAMS_NEXT_BTN);
 
   await updateStateWinners();
 };

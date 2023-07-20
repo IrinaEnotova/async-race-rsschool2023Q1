@@ -215,10 +215,8 @@ const createGarage = async (): Promise<void> => {
   createBasicElement(PARAMS_CARS_CONTAINER);
 
   createBasicElement(PARAMS_GARAGE_PAGINATION_WRAPPER);
-  if (store.garagePageCount > 1) {
-    createDisabledElement(PARAMS_PREV_BTN);
-    createDisabledElement(PARAMS_NEXT_BTN);
-  }
+  createDisabledElement(PARAMS_PREV_BTN);
+  createDisabledElement(PARAMS_NEXT_BTN);
 
   await updateStateGarage();
 };

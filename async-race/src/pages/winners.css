@@ -75,3 +75,7 @@ table th.th-time {
 .page-item:hover {
   background-color: #cacaca;
 }
+
+.hidden-pagination {
+  display: none;
+}

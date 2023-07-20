@@ -57,16 +57,16 @@ const createDeleteButton = (id: number): void => {
 
       const target = event.target as HTMLElement;
       const selectedId = Number(target.getAttribute('data-index'));
+      await deleteCar(selectedId);
+      await updateStateGarage();
       const winnerCar = store.winnersArray.find((winner) => {
         return selectedId === winner.id;
       });
       if (winnerCar) {
         winnersCount.textContent = `Winners: ${store.winnersCount - 1} ${store.winnersCount === 1 ? 'car' : 'cars'}`;
+        await deleteWinner(selectedId);
+        await updateStateWinners();
       }
-      await deleteCar(selectedId);
-      await deleteWinner(selectedId);
-      await updateStateGarage();
-      await updateStateWinners();
     },
     dataIndex: `${id}`,
   });

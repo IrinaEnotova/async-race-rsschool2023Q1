@@ -47,6 +47,15 @@ export async function updateStateGarage(garagePage = store.carsPage): Promise<vo
   await updateCarsStore(garagePage);
   store.fullCarsArray = await getAllCars();
   store.garagePageCount = Math.ceil(store.fullCarsArray.length / CARS_PER_PAGE);
+
+  setTimeout(() => {
+    const garagePagination = document.querySelector('.garage-pagination') as HTMLElement;
+    if (store.fullCarsArray.length < 8) {
+      garagePagination.classList.add('hidden-pagination');
+    } else {
+      garagePagination.classList.remove('hidden-pagination');
+    }
+  }, 10);
 }
 
 export async function updateStateWinners(
@@ -59,4 +68,13 @@ export async function updateStateWinners(
 
   store.fullWinnersArray = await getAllWinners();
   store.winnersPageCount = Math.ceil(store.fullWinnersArray.length / WINNERS_PER_PAGE);
+
+  setTimeout(() => {
+    const winnerPagination = document.querySelector('.winners-pagination') as HTMLElement;
+    if (store.fullWinnersArray.length < 11) {
+      winnerPagination.classList.add('hidden-pagination');
+    } else {
+      winnerPagination.classList.remove('hidden-pagination');
+    }
+  }, 10);
 }
