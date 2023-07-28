@@ -1,6 +1,6 @@
-import { PARAMS_MAIN } from '../../utils/consts';
+import { PARAMS_MAIN } from '../../utils/constants/consts';
 import createGarage from '../../pages/garage';
-import { createBasicElement } from '../../utils/createElements';
+import createBasicElement from '../../utils/createElements/createBasicElement';
 import './main.css';
 import createWinners from '../../pages/winners';
 

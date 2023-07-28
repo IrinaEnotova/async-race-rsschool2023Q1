@@ -1,6 +1,6 @@
 import Methods from '../types/enums';
 import { ICar, ICars, ICarCharacteristics } from '../types/interfaces';
-import { BASE_URL, CARS_PER_PAGE, GARAGE_URL } from '../utils/consts';
+import { BASE_URL, CARS_PER_PAGE, GARAGE_URL } from '../utils/constants/consts_API';
 
 export async function getAllCars(): Promise<ICar[]> {
   const response = await fetch(GARAGE_URL);

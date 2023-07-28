@@ -1,4 +1,4 @@
-import { WINNERS_PER_PAGE, WINNERS_URL } from '../utils/consts';
+import { WINNERS_PER_PAGE, WINNERS_URL } from '../utils/constants/consts_API';
 import { ICar, IWinner, IWinners } from '../types/interfaces';
 import Methods from '../types/enums';
 

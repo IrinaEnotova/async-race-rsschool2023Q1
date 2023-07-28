@@ -1,6 +1,6 @@
 import { ICarWithoutId } from '../types/interfaces';
-import carBrands from './carBrands';
-import carModels from './carModels';
+import carBrands from './constants/carBrands';
+import carModels from './constants/carModels';
 
 const generateName = (): string => {
   const idxBrand: number = Math.floor(Math.random() * carBrands.length);

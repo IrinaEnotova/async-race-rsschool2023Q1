@@ -4,8 +4,8 @@ import {
   PARAMS_HEADER,
   PARAMS_HEADER_BTNS,
   PARAMS_HEADING,
-} from '../../utils/consts';
-import { createBasicElement } from '../../utils/createElements';
+} from '../../utils/constants/consts';
+import createBasicElement from '../../utils/createElements/createBasicElement';
 import './header.css';
 
 const createHeader = (): void => {

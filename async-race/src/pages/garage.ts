@@ -1,4 +1,5 @@
-import { createBasicElement, createDisabledElement } from '../utils/createElements';
+import createBasicElement from '../utils/createElements/createBasicElement';
+import createDisabledElement from '../utils/createElements/createDisabledElement';
 import {
   PARAMS_GARAGE_WRAPPER,
   PARAMS_GARAGE,
@@ -8,7 +9,7 @@ import {
   PARAMS_CARS_CONTAINER,
   PARAMS_RACE_BTNS_CONTAINER,
   PARAMS_GARAGE_PAGINATION_WRAPPER,
-} from '../utils/consts';
+} from '../utils/constants/consts';
 import createForm from '../components/forms/forms';
 import { updateStateGarage, updateStateWinners } from '../api/api-update';
 import { IBasicElementParams, IElementDisabled } from '../types/interfaces';

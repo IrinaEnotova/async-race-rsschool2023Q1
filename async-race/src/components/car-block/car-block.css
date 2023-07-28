@@ -6,7 +6,7 @@
 
 .car-block {
   position: relative;
-  border-bottom: 3px dashed #cacaca;
+  border-bottom: 3px dashed var(--border-color);
 }
 
 .car-info {
@@ -16,7 +16,7 @@
 }
 
 .car-engine {
-  color: red;
+  color: var(--red-color);
   margin: 14px 0;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .car-btn {
-  background-color: #fff;
+  background-color: var(--text-color);
   padding: 3px 10px;
   border-radius: 5px;
   transition: all 0.2s ease-in;
@@ -36,14 +36,14 @@
 
 .select-btn:hover,
 .start-btn:hover {
-  background-color: rgb(177, 189, 63);
-  color: #fff;
+  background-color: var(--green-color);
+  color: var(--text-color);
 }
 
 .delete-btn:hover,
 .stop-btn:hover {
-  background-color: red;
-  color: #fff;
+  background-color: var(--red-color);
+  color: var(--text-color);
 }
 
 .car-img {

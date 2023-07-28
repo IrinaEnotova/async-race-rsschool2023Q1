@@ -1,5 +1,6 @@
 import { ICar, IWinner } from '../../types/interfaces';
-import { createBasicElement, createElementWithInner } from '../../utils/createElements';
+import createBasicElement from '../../utils/createElements/createBasicElement';
+import createElementWithInner from '../../utils/createElements/createElementWithInner';
 import getCarImg from '../../utils/getCarImg';
 import store from '../../utils/store';
 import './winners-row.css';

@@ -5,13 +5,11 @@ import {
   PARAMS_FORM_UPDATE,
   PARAMS_INPUT_TEXT_UPDATE,
   PARAMS_INPUT_COLOR_UPDATE,
-} from '../../utils/consts';
-import {
-  createBasicElement,
-  createElementWithEvent,
-  createDisabledElement,
-  createInputElement,
-} from '../../utils/createElements';
+} from '../../utils/constants/consts';
+import createBasicElement from '../../utils/createElements/createBasicElement';
+import createElementWithEvent from '../../utils/createElements/createElementWithEvent';
+import createDisabledElement from '../../utils/createElements/createDisabledElement';
+import createInputElement from '../../utils/createElements/createInputElement';
 import { IEventElementParams, IElementDisabled } from '../../types/interfaces';
 import { createCar, updateCar } from '../../api/api-garage';
 import store from '../../utils/store';

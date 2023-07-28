@@ -3,9 +3,8 @@ import {
   PARAMS_NUM_OF_PAGE,
   PARAMS_WINNERS_HEADING,
   PARAMS_NUM_OF_PAGE_WINNERS,
-  CARS_PER_PAGE,
-  WINNERS_PER_PAGE,
-} from '../utils/consts';
+} from '../utils/constants/consts';
+import { CARS_PER_PAGE, WINNERS_PER_PAGE } from '../utils/constants/consts_API';
 // eslint-disable-next-line import/no-cycle
 import createCarBlock from '../components/car-block/car-block';
 import store from '../utils/store';

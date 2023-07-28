@@ -1,9 +1,7 @@
-import {
-  createBasicElement,
-  createElementWithData,
-  createElementWithInner,
-  createDisabledElement,
-} from '../../utils/createElements';
+import createBasicElement from '../../utils/createElements/createBasicElement';
+import createElementWithData from '../../utils/createElements/createElementWithData';
+import createElementWithInner from '../../utils/createElements/createElementWithInner';
+import createDisabledElement from '../../utils/createElements/createDisabledElement';
 import getCarImg from '../../utils/getCarImg';
 import { ICar } from '../../types/interfaces';
 import store from '../../utils/store';

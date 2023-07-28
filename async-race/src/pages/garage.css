@@ -4,7 +4,7 @@
 
 .winner-message {
   text-align: center;
-  color: green;
+  color: var(--dark-green-color);
 }
 
 .race-btns-container {
@@ -23,22 +23,22 @@
 
 .race-btn,
 .reset-btn {
-  background-color: yellow;
+  background-color: var(--yellow-color);
 }
 
 .race-btn:hover {
-  background-color: rgb(177, 189, 63);
-  color: #fff;
+  background-color: var(--green-color);
+  color: var(--text-color);
 }
 
 .reset-btn:hover {
-  background-color: red;
-  color: #fff;
+  background-color: var(--red-color);
+  color: var(--text-color);
 }
 
 .generate-btn:hover {
-  background-color: rgb(177, 189, 63);
-  color: #fff;
+  background-color: var(--green-color);
+  color: var(--text-color);
 }
 
 .garage-pagination {
@@ -52,14 +52,14 @@
 
 .page-item {
   padding: 5px 15px;
-  background-color: rgb(177, 189, 63);
+  background-color: var(--green-color);
   border-radius: 5px;
   transition: all 0.2s ease-in;
   cursor: pointer;
 }
 
 .page-item:hover {
-  background-color: #cacaca;
+  background-color: var(--border-color);
 }
 
 .hidden-pagination {

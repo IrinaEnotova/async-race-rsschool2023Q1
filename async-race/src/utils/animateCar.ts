@@ -1,5 +1,5 @@
 import { switchCarEngine } from '../api/api-garage';
-import { INTERNAL_SERVER_ERROR } from './consts';
+import { INTERNAL_SERVER_ERROR } from './constants/consts_API';
 import { IRequestIds } from '../types/interfaces';
 import store from './store';
 

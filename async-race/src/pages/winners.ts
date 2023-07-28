@@ -8,9 +8,10 @@ import {
   PARAMS_TH_ITEM,
   PARAMS_TBODY,
   PARAMS_WINNERS_PAGINATION_WRAPPER,
-  WINNERS_PER_PAGE,
-} from '../utils/consts';
-import { createBasicElement, createDisabledElement } from '../utils/createElements';
+} from '../utils/constants/consts';
+import { WINNERS_PER_PAGE } from '../utils/constants/consts_API';
+import createBasicElement from '../utils/createElements/createBasicElement';
+import createDisabledElement from '../utils/createElements/createDisabledElement';
 import { updateStateWinners } from '../api/api-update';
 import store from '../utils/store';
 import { IElementDisabled } from '../types/interfaces';
